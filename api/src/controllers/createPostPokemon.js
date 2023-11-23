@@ -15,7 +15,7 @@ const createPostPokemon = async (req, res) => {
         //asociamos los types con el nuevo pokemon
         await newPokemon.addTypes(typesBD);
 
-        return res.status(200).json(newPokemon);
+        return res.status(200).send(`El pokémon ${name} fue creado correctamente`);
 
     } catch (error) {
         return res.status(400).json(error.message);
