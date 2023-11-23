@@ -28,11 +28,14 @@ const getAllPokemon = async (req, res) => {
             };
 
         } else {
+            const limit = 100;
+            const offset = 0;
 
-            const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon');
-            const character = data.results.map((element) => ({name: element.name}));
+            const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`);
+            const character = data.results.map((e) => ({ name: e.name }));
 
             return res.status(200).json(character);
+
         }
 
     } catch (error) {

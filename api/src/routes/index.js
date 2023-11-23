@@ -23,3 +23,4 @@ router.get('/types', getTypes);
 
 
 module.exports = router;
+
