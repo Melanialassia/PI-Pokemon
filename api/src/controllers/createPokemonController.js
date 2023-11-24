@@ -1,11 +1,12 @@
-const { Pokemon, Types } = require('../db');
+const { Pokemon, Types} = require('../db');
 
 const createPokemonController = async (name, image, hp, attack, defense, speed, types, height, weight) => {
     //Creamos el pokemon
-    const newPokemon = await Pokemon.create({ name, image, hp, attack, defense, speed, height, types, weight });
+    const newPokemon = await Pokemon.create({ name, image, hp, attack, defense, speed, height, weight });
     //buscamos el type en nuestro modelo TYPES
     const typesBD = await Types.findAll({ where: { name: types } });
-    //asociamos los types con el nuevo pokemon
+
+    // relacionamos los pokemons con los types en la tabla intermedia
     await newPokemon.addTypes(typesBD);
 
     return newPokemon;
@@ -23,5 +24,6 @@ module.exports = {
 //     "defense": 400,
 //     "speed":34,
 //     "height": 499,
+//      "types" : ["normal", "poison"]
 //     "weight": 6
 //   }
