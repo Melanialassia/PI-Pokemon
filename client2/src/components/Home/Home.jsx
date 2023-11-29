@@ -1,22 +1,26 @@
-import SearchBar from "../SearchBar/SearchBar";
+import NavBar from "../NavBar/NavBAr";
 import Pokemons from "../Pokemons/Pokemons";
 //dependencies
 import axios from "axios";
 //Hooks
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
-import { getAllPokemons } from "../../redux/actions/actions";
+import {
+    getAllPokemons,
+    orderName,
+    orderAttack,
+    filterPokemons
+} from "../../redux/actions/actions";
 
 
 const Home = () => {
+    const allPokemons = useSelector((state) => state.allPokemons);
     const [pokemons, setPokemons] = useState([]);
-
     const dispatch = useDispatch();
-    const allPokemons = useSelector((state) => state.pokemons);
 
     useEffect(() => {
         dispatch(getAllPokemons());
-    }, []);
+    }, [dispatch]);
 
     const onSearch = async (name) => {
         try {
@@ -24,10 +28,7 @@ const Home = () => {
             const { data } = await axios(URL + `?name=${name}`);
 
             if (data.name) {
-                const pokemonName = setPokemons((oldPokemons) => {
-                    [...oldPokemons, data]
-                    return pokemonName
-                });
+                setPokemons((oldPokemons) => [...oldPokemons, data]);
             }
         } catch (error) {
             console.error('Error al realizar la solicitud:', error);
@@ -35,14 +36,42 @@ const Home = () => {
         }
     };
 
+    const handlerOrderName = (event) => {
+        dispatch(orderName(event.target.value));
+    };
+
+    const handlerOrderAttack = (event) => {
+        dispatch(orderAttack(event.target.value));
+    };
+
+    const handlerFilterPokemons = (event) => {
+        dispatch(filterPokemons(event.target.value))
+    };
 
     return (
-        <nav>
-            <SearchBar onSearch={onSearch} />
-            <button>Filtar</button>
-            <button>Ordenar</button>
-            <Pokemons  />
-        </nav>
+        <div>
+            <NavBar onSearch />
+            <select>
+                <option>Tipos</option>
+                <option>Todos</option>
+            </select>
+            <select onChange={handlerOrderAttack}>
+                <option >Ataque</option>
+                <option value={"min"}>min</option>
+                <option value={"max"}>max</option>
+            </select>
+            <select onChange={handlerOrderName}>
+                <option value={"A-Z"}>A-Z</option>
+                <option value={"Z-A"}>Z-A</option>
+            </select>
+            <select onChange={handlerFilterPokemons}>
+                <option value={"all"}>Todos</option>
+                <option value={"api"}>Api</option>
+                <option value={"created"}>Creados</option>
+            </select>
+
+            <Pokemons allPokemons={allPokemons} />
+        </div>
     )
 };
 

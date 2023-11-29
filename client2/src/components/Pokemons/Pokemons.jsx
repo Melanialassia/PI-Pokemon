@@ -1,12 +1,9 @@
 import Pokemon from "../Pokemon/Pokemon";
-import {useSelector} from "react-redux"
 
-const Pokemons = () => {
-    const allPokemons = useSelector((state) => state.pokemons);
-
+const Pokemons = ({ allPokemons }) => {
     return (
-        <div>
-            {allPokemons?.map((p) => {
+        <>
+            {allPokemons.map((p) => {
                 return (
                     <Pokemon
                         key={p.id}
@@ -20,10 +17,10 @@ const Pokemons = () => {
                         height={p.height}
                         weight={p.weight}
                         types={p.types}
-
+                
                     />)
             })}
-        </div>
+        </>
     );
 };
 

@@ -6,7 +6,7 @@ const { getPokemonIdHandler } = require('../handlers/getPokemonIdHandler');
 
 router.get('/',  getPokemonHandler);
 
-router.get('/pokemons/:id', getPokemonIdHandler);
+router.get('/:id', getPokemonIdHandler);
 
 router.post('/create', postPokemonHandler);
 

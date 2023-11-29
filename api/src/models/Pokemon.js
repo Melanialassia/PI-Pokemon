@@ -7,33 +7,42 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false
     },
     image: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     hp: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING,
+      allowNull: false
     },
     attack: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING,
+      allowNull: false
     },
     defense: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING,
+      allowNull: false
     },
     speed: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING,
+      allowNull: false
     },
     height: {
       type: DataTypes.INTEGER
     },
     weight: {
       type: DataTypes.INTEGER
-    }
+    },
+    createPokemonDb: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    },
   },
     { timestamps: false });
 };
