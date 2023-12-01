@@ -13,7 +13,7 @@ import {
 const initialState = {
     allPokemons: [],
     pokemonDetail: {},
-    pokemon: [],
+    pokemonFilter: [],
     types: []
 
 };
@@ -24,7 +24,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 allPokemons: action.payload,
-                pokemon: action.payload
+                pokemonFilter: action.payload
 
             }
 
@@ -60,7 +60,7 @@ const reducer = (state = initialState, action) => {
                 : [...state.allPokemons].filter((p) => p.types.includes(action.payload))
             return {
                 ...state,
-                pokemon: filterTypes
+                pokemonFilter: filterTypes
             }
 
         case ORDER_NAME:
@@ -69,7 +69,7 @@ const reducer = (state = initialState, action) => {
                 : [...state.allPokemons].sort((a, b) => b.id - a.id)
             return {
                 ...state,
-                pokemon: sortName
+                pokemonFilter: sortName
             }
 
         case ORDER_ATTACK:
@@ -78,7 +78,7 @@ const reducer = (state = initialState, action) => {
                 : [...state.allPokemons].sort((a, b) => b.attack - a.attack)
             return {
                 ...state,
-                pokemon: sortAttack
+                pokemonFilter: sortAttack
             }
 
         case FILTER_POKEMONS:
@@ -87,7 +87,7 @@ const reducer = (state = initialState, action) => {
                 : [...state.allPokemons].filter((e) => !e.createPokemonDb)
             return {
                 ...state,
-                pokemon: action.payload === "all" ? [...state.allPokemons] : filterApiOrDb
+                pokemonFilter: action.payload === "all" ? [...state.allPokemons] : filterApiOrDb
             }
 
         default:

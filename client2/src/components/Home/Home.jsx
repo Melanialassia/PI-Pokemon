@@ -15,7 +15,7 @@ import {
 
 
 const Home = () => {
-    const allPokemons = useSelector((state) => state.pokemon);
+    const allPokemons = useSelector((state) => state.pokemonFilter);
     const allTypes = useSelector((state) => state.types);
     const dispatch = useDispatch();
 
