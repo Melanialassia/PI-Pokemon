@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const Pokemon = ({id, name, image, types}) => {
-
     return (
         <div>
             <Link to={`/detail/${id}`}>

@@ -7,32 +7,44 @@ import { getDetailPokemon, cleanDetail } from "../../redux/actions/actions";
 const Detail = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    
+    const pokemonDetail = useSelector((state) => state.pokemonDetail);
+
     useEffect(() => {
         dispatch(getDetailPokemon(id));
         return () => dispatch(cleanDetail());
-        // eslint-disable-next-line
-      }, []);
-    
-    const pokemonDetail = useSelector((state) => state.pokemonDetail);
+    }, []);
 
     return (
         <div>
-            <h1>{pokemonDetail[0]?.name ? pokemonDetail[0].name : "null"}</h1>
-            <img src={pokemonDetail[0]?.image} alt={pokemonDetail[0]?.name} style={{ maxWidth: "200px", maxHeight: "200px" }}/>
-            <p>Tipo: {pokemonDetail[0]?.types.join(" ")}</p>
-            <span>HP: {pokemonDetail[0]?.hp}</span>
-            <br />
-            <span>Ataque: {pokemonDetail[0]?.attack}</span>
-            <br />
-            <span>Defensa: {pokemonDetail[0]?.defense}</span>
-            <br />
-            <span>Velocidad: {pokemonDetail[0]?.speed}</span>
-            <br />
-            <span>Altura: {pokemonDetail[0]?.height}</span>
+            {
+                Object.keys(pokemonDetail).length > 0 ? (
+                    <div>
+                        <h1>{pokemonDetail.name ? pokemonDetail.name : "No encontrado"}</h1>
+                        <img
+                            src={pokemonDetail.image}
+                            alt={pokemonDetail.name}
+                            style={{ maxWidth: "200px", maxHeight: "200px" }}
+                        />
+                        <p>Tipo: {pokemonDetail.types.join(" ")}</p>
+                        <span>HP: {pokemonDetail.hp}</span>
+                        <br />
+                        <span>Ataque: {pokemonDetail.attack}</span>
+                        <br />
+                        <span>Defensa: {pokemonDetail.defense}</span>
+                        <br />
+                        <span>Velocidad: {pokemonDetail.speed}</span>
+                        <br />
+                        <span>Altura: {pokemonDetail.height}</span>
+                    </div>
+                ) : (
+                    <div>
+                        <p>cargando...</p>
+                    </div>
+                )
+            }
 
         </div>
-    )
+    );
 };
 
 export default Detail;

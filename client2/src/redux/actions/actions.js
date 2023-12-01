@@ -1,6 +1,8 @@
 import {
     GET_ALL_POKEMONS,
     GET_DETAIL_POKEMON,
+    GET_NAME_POKEMON,
+    GET_TYPES,
     CLEAN_DETAIL,
     FILTER_TYPE,
     ORDER_NAME,
@@ -18,9 +20,8 @@ export const getAllPokemons = () => {
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 };
-
 
 export const getDetailPokemon = (id) => {
     return async (dispatch) => {
@@ -30,40 +31,74 @@ export const getDetailPokemon = (id) => {
         } catch (error) {
             console.log(error);
         }
-    }
+    };
+};
+
+export const getPokemonName = (name) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`http://localhost:3001/pokemons/?name=${name}`);
+            return dispatch({ type: GET_NAME_POKEMON, payload: data });
+        }catch (error){
+            console.log(error);
+        }
+    };
+};
+
+export const getTypes = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get('http://localhost:3001/types/', {});
+            return dispatch({ type: GET_TYPES, payload: data });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+};
+
+export const createPokemon = (input) => {
+    return async () => {
+        try {
+            const response = await axios.post('http://localhost:3001/pokemons/create', input);
+            alert("Pokemon creado con exito");
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
+    };
 };
 
 export const cleanDetail = () => {
     return {
         type: CLEAN_DETAIL
-    }
+    };
 };
 
 export const filterType = (payload) => {
     return {
         type: FILTER_TYPE,
         payload
-    }
+    };
 };
 
 export const orderName = (order) => {
     return {
         type: ORDER_NAME,
         payload: order
-    }
+    };
 };
 
 export const orderAttack = (payload) => {
     return {
         type: ORDER_ATTACK,
         payload
-    }
+    };
 };
 
 export const filterPokemons = (payload) => {
     return {
         type: FILTER_POKEMONS,
         payload
-    }
+    };
 };
 

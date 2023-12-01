@@ -25,7 +25,7 @@ const getPokemonController = async (nameToLowerCase) => {
             return pokemon;
         }
     } else {
-        const limit = 50;
+        const limit = 100;
         const offset = 0;
         const informacion = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`);
         const api = await informacion.data.results;

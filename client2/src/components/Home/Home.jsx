@@ -1,40 +1,28 @@
-import NavBar from "../NavBar/NavBAr";
+import NavBar from "../NavBar/NavBar"
 import Pokemons from "../Pokemons/Pokemons";
-//dependencies
-import axios from "axios";
 //Hooks
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
+//actions
 import {
+    getTypes,
     getAllPokemons,
     orderName,
     orderAttack,
-    filterPokemons
+    filterPokemons,
+    filterType
 } from "../../redux/actions/actions";
 
 
 const Home = () => {
-    const allPokemons = useSelector((state) => state.allPokemons);
-    const [pokemons, setPokemons] = useState([]);
+    const allPokemons = useSelector((state) => state.pokemon);
+    const allTypes = useSelector((state) => state.types);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getAllPokemons());
-    }, [dispatch]);
-
-    const onSearch = async (name) => {
-        try {
-            const URL = 'http://localhost:3001/pokemons'
-            const { data } = await axios(URL + `?name=${name}`);
-
-            if (data.name) {
-                setPokemons((oldPokemons) => [...oldPokemons, data]);
-            }
-        } catch (error) {
-            console.error('Error al realizar la solicitud:', error);
-            throw Error(error.message)
-        }
-    };
+        dispatch(getTypes());
+    }, []);
 
     const handlerOrderName = (event) => {
         dispatch(orderName(event.target.value));
@@ -45,15 +33,26 @@ const Home = () => {
     };
 
     const handlerFilterPokemons = (event) => {
-        dispatch(filterPokemons(event.target.value))
+        dispatch(filterPokemons(event.target.value));
+    };
+
+    const handlerTypes = (event) => {
+        dispatch(filterType(event.target.value));
     };
 
     return (
         <div>
-            <NavBar onSearch />
-            <select>
+            <NavBar />
+            <select onChange={handlerTypes}>
                 <option>Tipos</option>
-                <option>Todos</option>
+                <option value="all">Todos</option>
+                {
+                    allTypes?.map((e, index) => (
+                        <option key={index} value={e.name}>
+                            {e.name}
+                        </option>
+                    ))
+                }
             </select>
             <select onChange={handlerOrderAttack}>
                 <option >Ataque</option>
@@ -61,8 +60,8 @@ const Home = () => {
                 <option value={"max"}>max</option>
             </select>
             <select onChange={handlerOrderName}>
-                <option value={"A-Z"}>A-Z</option>
-                <option value={"Z-A"}>Z-A</option>
+                <option value={"A-Z"}>A - Z</option>
+                <option value={"Z-A"}>Z - A</option>
             </select>
             <select onChange={handlerFilterPokemons}>
                 <option value={"all"}>Todos</option>

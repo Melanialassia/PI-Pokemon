@@ -4,7 +4,7 @@ const getPokemonHandler = async (req, res) => {
     try {
         const { name } = req.query;
         if (name) {
-            const nameToLowerCase = name ? name.toLowerCase() : null;
+            const nameToLowerCase =  name.toLowerCase();
             const response = await getPokemonController(nameToLowerCase);
             return res.status(200).json(response);
 

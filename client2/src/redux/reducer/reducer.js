@@ -1,6 +1,8 @@
 import {
     GET_ALL_POKEMONS,
     GET_DETAIL_POKEMON,
+    GET_NAME_POKEMON,
+    GET_TYPES,
     CLEAN_DETAIL,
     FILTER_TYPE,
     ORDER_NAME,
@@ -10,7 +12,9 @@ import {
 
 const initialState = {
     allPokemons: [],
-    pokemonDetail: {}
+    pokemonDetail: {},
+    pokemon: [],
+    types: []
 
 };
 
@@ -19,52 +23,79 @@ const reducer = (state = initialState, action) => {
         case GET_ALL_POKEMONS:
             return {
                 ...state,
-                allPokemons: action.payload
+                allPokemons: action.payload,
+                pokemon: action.payload
+
             }
+
         case GET_DETAIL_POKEMON:
-            console.log("En el reducer - Receiving Pokémon details - action.payload:", action.payload);
+
             return {
                 ...state,
                 pokemonDetail: action.payload
             }
+
+
         case CLEAN_DETAIL:
             return {
                 ...state,
                 pokemonDetail: {}
             }
-        case FILTER_TYPE:
-            return {
 
+        // case GET_NAME_POKEMON:
+        //     return {
+        //         ...state,
+        //         pokemonName: action.payload
+        //     }
+
+        case GET_TYPES:
+            return {
+                ...state,
+                types: action.payload
             }
+
+        case FILTER_TYPE:
+            const filterTypes = action.payload === "all"
+                ? [...state.allPokemons]
+                : [...state.allPokemons].filter((p) => p.types.includes(action.payload))
+            return {
+                ...state,
+                pokemon: filterTypes
+            }
+
         case ORDER_NAME:
             const sortName = action.payload === "A-Z"
                 ? [...state.allPokemons].sort((a, b) => a.id - b.id)
                 : [...state.allPokemons].sort((a, b) => b.id - a.id)
             return {
                 ...state,
-                allPokemons: sortName
+                pokemon: sortName
             }
+
         case ORDER_ATTACK:
             const sortAttack = action.payload === "min"
                 ? [...state.allPokemons].sort((a, b) => a.attack - b.attack)
                 : [...state.allPokemons].sort((a, b) => b.attack - a.attack)
             return {
                 ...state,
-                allPokemons: sortAttack
+                pokemon: sortAttack
             }
+
         case FILTER_POKEMONS:
             const filterApiOrDb = action.payload === "created"
                 ? [...state.allPokemons].filter((e) => e.createPokemonDb)
                 : [...state.allPokemons].filter((e) => !e.createPokemonDb)
             return {
                 ...state,
-                allPokemons: action.payload === "all" ? [...state.allPokemons] : filterApiOrDb
+                pokemon: action.payload === "all" ? [...state.allPokemons] : filterApiOrDb
             }
+
         default:
             return {
                 ...state
             }
-    }
+
+    };
 };
 
 export default reducer;
