@@ -8,7 +8,6 @@ import validate from "./Validate";
 const Form = () => {
     const dispatch = useDispatch();
     const types = useSelector((state) => state.types);
-    const [view, setView] = useState([]);
 
     const [input, setInput] = useState({
         name: "",
@@ -33,14 +32,14 @@ const Form = () => {
             ...input,
             [event.target.name]: [event.target.value]
         });
-        
-        if([event.target.name]){
+
+        if ([event.target.name]) {
             setErrors(validate({
-            ...input,
-            [event.target.name]: [event.target.value]
-        })); 
+                ...input,
+                [event.target.name]: [event.target.value]
+            }));
         }
-       
+
     };
 
     const handleSelect = (event) => {
@@ -90,8 +89,7 @@ const Form = () => {
     };
 
     return (
- 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(event) => handleSubmit(event)}>
             <label htmlFor="name"> Nombre: </label>
             <input
                 id="name"
@@ -110,7 +108,7 @@ const Form = () => {
                 type="text"
                 name="image"
                 value={input.image}
-                onChange={handleChange}
+                onChange={(event) => handleChange(event)}
             />
             {errors.image !== '' && <p>{errors.image}</p>}
             <br />
@@ -121,7 +119,7 @@ const Form = () => {
                 type="number"
                 name="hp"
                 value={input.hp}
-                onChange={handleChange}
+                onChange={(event) => handleChange(event)}
             />
             {errors.hp !== '' && <p>{errors.hp}</p>}
             <br />
@@ -132,7 +130,7 @@ const Form = () => {
                 type="number"
                 name="attack"
                 value={input.attack}
-                onChange={handleChange}
+                onChange={(event) => handleChange(event)}
             />
             {errors.attack !== '' && <p>{errors.attack}</p>}
             <br />
@@ -143,7 +141,7 @@ const Form = () => {
                 type="number"
                 name="defense"
                 value={input.defense}
-                onChange={handleChange}
+                onChange={(event) => handleChange(event)}
             />
             {errors.defense !== '' && <p>{errors.defense}</p>}
             <br />
@@ -154,7 +152,7 @@ const Form = () => {
                 type="number"
                 name="speed"
                 value={input.speed}
-                onChange={handleChange}
+                onChange={(event) => handleChange(event)}
             />
             {errors.speed !== '' && <p>{errors.speed}</p>}
             <br />
@@ -165,7 +163,7 @@ const Form = () => {
                 type="number"
                 name="height"
                 value={input.height}
-                onChange={handleChange}
+                onChange={(event) => handleChange(event)}
             />
             {errors.height !== '' && <p>{errors.height}</p>}
             <br />
@@ -176,7 +174,7 @@ const Form = () => {
                 type="number"
                 name="weight"
                 value={input.weight}
-                onChange={handleChange}
+                onChange={(event) => handleChange(event)}
             />
             {errors.weight !== '' && <p>{errors.weight}</p>}
             <br />
@@ -184,7 +182,7 @@ const Form = () => {
                 Seleccione los tipos: </label>
             <select
                 id="types"
-                onChange={handleSelect}
+                onChange={(event) => handleSelect(event)}
             >
                 {
                     types.map((e, index) => (
@@ -201,6 +199,13 @@ const Form = () => {
             <br />
             <br />
             <button type="submit">Crear</button>
+            <br />
+            <br />
+            <div>
+                <Link to={"/home"}>
+                    <button>Volver</button>
+                </Link>
+            </div>
         </form >
     );
 };

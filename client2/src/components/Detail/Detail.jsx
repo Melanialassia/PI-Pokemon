@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetailPokemon, cleanDetail } from "../../redux/actions/actions";
+import { Link } from "react-router-dom";
 
 const Detail = () => {
     const { id } = useParams();
@@ -42,7 +43,9 @@ const Detail = () => {
                     </div>
                 )
             }
-
+            <Link to={"/home"}>
+            <button>Volver</button>
+            </Link>
         </div>
     );
 };

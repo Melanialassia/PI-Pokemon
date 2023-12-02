@@ -17,7 +17,7 @@ const validate = (input) => {
     };
 
     if (!regexImage.test(input.image)) {
-        errors.image = "Ingrese una url valida"
+        errors.image = "Ingrese una url valida";
     };
 
     if (!input.hp) {
@@ -29,7 +29,7 @@ const validate = (input) => {
     };
 
     if (!regexNumber.test(input.hp)) {
-        errors.hp = "Solo se permiten numeros"
+        errors.hp = "Solo se permiten numeros mayores a 0";
     };
 
     if (!input.attack) {
@@ -41,7 +41,7 @@ const validate = (input) => {
     };
 
     if (!regexNumber.test(input.attack)) {
-        errors.attack = "Solo se permiten numeros"
+        errors.attack = "Solo se permiten numeros mayores a 0";
     };
 
     if (!input.defense) {
@@ -53,7 +53,7 @@ const validate = (input) => {
     };
 
     if (!regexNumber.test(input.defense)) {
-        errors.defense = "Solo se permiten numeros"
+        errors.defense = "Solo se permiten numeros mayores a 0";
     };
 
     if (input.speed <= 0) {
@@ -61,7 +61,7 @@ const validate = (input) => {
     };
 
     if (!regexNumber.test(input.speed)) {
-        errors.speed = "Solo se permiten numeros"
+        errors.speed = "Solo se permiten numeros mayores a 0";
     };
 
     if (input.height <= 0) {
@@ -69,7 +69,7 @@ const validate = (input) => {
     };
 
     if (!regexNumber.test(input.height)) {
-        errors.height = "Solo se permiten numeros"
+        errors.height = "Solo se permiten numeros mayores a 0";
     };
 
     if (input.weight <= 0) {
@@ -77,11 +77,11 @@ const validate = (input) => {
     };
 
     if (!regexNumber.test(input.weight)) {
-        errors.weight = "Solo se permiten numeros"
+        errors.weight = "Solo se permiten numeros mayores a 0";
     };
 
     if (input.types.length >= 2) {
-        errors.types = "Solo vas a poder seleccionar 2 tipos"
+        errors.types = "Solo vas a poder seleccionar 2 tipos";
     };
 
 

@@ -1,8 +1,9 @@
 import NavBar from "../NavBar/NavBar"
-import Pokemons from "../Pokemons/Pokemons";
+import Pokemon from "../Pokemon/Pokemon";
+import Paginate from "../Paginate/Paginate";
 //Hooks
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux"
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 //actions
 import {
     getTypes,
@@ -19,9 +20,16 @@ const Home = () => {
     const allTypes = useSelector((state) => state.types);
     const dispatch = useDispatch();
 
+    //Paginado
+    const [paginate, setPaginate] = useState(1); // la pagina
+    const [cantPokemons, setCantPaginate] = useState(12); // cantidad de pokemones que se van a mostrar por pagina
+    const totalPages = allPokemons.length / cantPokemons;// la cantidad de pagina que van a existir
+  
+    
     useEffect(() => {
         dispatch(getAllPokemons());
         dispatch(getTypes());
+
     }, []);
 
     const handlerOrderName = (event) => {
@@ -43,7 +51,7 @@ const Home = () => {
     return (
         <div>
             <NavBar />
-            <select onChange={handlerTypes}>
+            <select onChange={(event) => handlerTypes(event)}>
                 <option>Tipos</option>
                 <option value="all">Todos</option>
                 {
@@ -54,22 +62,35 @@ const Home = () => {
                     ))
                 }
             </select>
-            <select onChange={handlerOrderAttack}>
+            <select onChange={(event) => handlerOrderAttack(event)}>
                 <option >Ataque</option>
                 <option value={"min"}>min</option>
                 <option value={"max"}>max</option>
             </select>
-            <select onChange={handlerOrderName}>
+            <select onChange={(event) => handlerOrderName(event)}>
                 <option value={"A-Z"}>A - Z</option>
                 <option value={"Z-A"}>Z - A</option>
             </select>
-            <select onChange={handlerFilterPokemons}>
+            <select onChange={(event) => handlerFilterPokemons(event)}>
                 <option value={"all"}>Todos</option>
                 <option value={"api"}>Api</option>
                 <option value={"created"}>Creados</option>
             </select>
+            {allPokemons?.slice(
+                (paginate - 1) * cantPokemons,
+                (paginate - 1) * cantPokemons + cantPokemons
+            ).map((p) => {
+                return (
+                    <Pokemon
+                        key={p.id}
+                        id={p.id}
+                        name={p.name}
+                        image={p.image}
+                        types={p.types}
+                    />)
+            })}
+            <Paginate paginate={paginate} setPaginate={setPaginate} totalPages={totalPages} />
 
-            <Pokemons allPokemons={allPokemons} />
         </div>
     )
 };

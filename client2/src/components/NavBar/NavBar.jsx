@@ -8,7 +8,6 @@ const NavBar = () => {
             <button>Crearte</button>
             </Link>
             <SearchBar/>
-
         </div>
 
     );

@@ -17,7 +17,7 @@ const SearchBar = () => {
 
     return (
         <div>
-            <input type="search" onChange={handleChange} value={name} />
+            <input type="search" onChange={(event) => handleChange(event)} value={name} />
             <button onClick={() => handleSubmit(name)}>Buscar</button>
         </div>
     );

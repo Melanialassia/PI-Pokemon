@@ -24,7 +24,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 allPokemons: action.payload,
-                pokemonFilter: action.payload
+                pokemonFilter: [...action.payload]
 
             }
 
@@ -42,11 +42,11 @@ const reducer = (state = initialState, action) => {
                 pokemonDetail: {}
             }
 
-        // case GET_NAME_POKEMON:
-        //     return {
-        //         ...state,
-        //         pokemonName: action.payload
-        //     }
+        case GET_NAME_POKEMON:
+            return {
+                ...state,
+                pokemonName: action.payload
+            }
 
         case GET_TYPES:
             return {
@@ -60,7 +60,7 @@ const reducer = (state = initialState, action) => {
                 : [...state.allPokemons].filter((p) => p.types.includes(action.payload))
             return {
                 ...state,
-                pokemonFilter: filterTypes
+                pokemonFilter: [...filterTypes]
             }
 
         case ORDER_NAME:
@@ -69,7 +69,7 @@ const reducer = (state = initialState, action) => {
                 : [...state.allPokemons].sort((a, b) => b.id - a.id)
             return {
                 ...state,
-                pokemonFilter: sortName
+                pokemonFilter: [...sortName]
             }
 
         case ORDER_ATTACK:
