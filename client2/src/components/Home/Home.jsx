@@ -23,13 +23,12 @@ const Home = () => {
     //Paginado
     const [paginate, setPaginate] = useState(1); // la pagina
     const [cantPokemons, setCantPaginate] = useState(12); // cantidad de pokemones que se van a mostrar por pagina
-    const totalPages = allPokemons.length / cantPokemons;// la cantidad de pagina que van a existir
-  
-    
+    const totalPages = Math.ceil(allPokemons.length / cantPokemons);// la cantidad de pagina que van a existir
+
+
     useEffect(() => {
         dispatch(getAllPokemons());
         dispatch(getTypes());
-
     }, []);
 
     const handlerOrderName = (event) => {
@@ -48,11 +47,18 @@ const Home = () => {
         dispatch(filterType(event.target.value));
     };
 
+    const refresh = () => {
+        dispatch(getAllPokemons());
+        setPaginate(1)
+    }
+
     return (
         <div>
             <NavBar />
+            <div>
+                <button onClick={refresh}>Recargar</button>
+            </div>
             <select onChange={(event) => handlerTypes(event)}>
-                <option>Tipos</option>
                 <option value="all">Todos</option>
                 {
                     allTypes?.map((e, index) => (
