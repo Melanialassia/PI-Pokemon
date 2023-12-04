@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 const Detail = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const pokemonDetail = useSelector((state) => state.pokemonDetail);
-
+    const pokemonDetail = useSelector((state) => state.detail);
+ 
     useEffect(() => {
         dispatch(getDetailPokemon(id));
         return () => dispatch(cleanDetail());

@@ -12,9 +12,10 @@ import {
 
 const initialState = {
     allPokemons: [],
-    pokemonDetail: {},
-    pokemonFilter: [],
-    types: []
+    pokemon: [],
+    notFound: false,
+    types: [],
+    detail: {}
 
 };
 
@@ -24,28 +25,36 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 allPokemons: action.payload,
-                pokemonFilter: [...action.payload]
-
+                pokemon:  [...action.payload]
             }
 
         case GET_DETAIL_POKEMON:
 
             return {
                 ...state,
-                pokemonDetail: action.payload
+                detail: action.payload
             }
 
 
         case CLEAN_DETAIL:
             return {
                 ...state,
-                pokemonDetail: {}
+                detail: {}
             }
 
         case GET_NAME_POKEMON:
-            return {
-                ...state,
-                pokemonName: action.payload
+            if (action.payload.error) {
+                return {
+                    ...state,
+                    pokemon: [],
+                    notFound: true
+                }
+            } else {
+                return {
+                    ...state,
+                    pokemon: action.payload,
+                    notFound: false
+                }
             }
 
         case GET_TYPES:
@@ -60,16 +69,35 @@ const reducer = (state = initialState, action) => {
                 : [...state.allPokemons].filter((p) => p.types.includes(action.payload))
             return {
                 ...state,
-                pokemonFilter: [...filterTypes]
+                pokemon: [...filterTypes]
             }
 
         case ORDER_NAME:
-            const sortName = action.payload === "A-Z"
-                ? [...state.allPokemons].sort((a, b) => a.id - b.id)
-                : [...state.allPokemons].sort((a, b) => b.id - a.id)
+            if(action.payload === "A-Z"){
+                const orderByName = [...state.allPokemons].sort((prev,next) => {
+                    if(prev.name > next.name) return 1;
+                    if(prev.name < next.name) return -1;
+                    return 0;
+                });
+                return {
+                    ...state,
+                    pokemon: [...orderByName]
+                }
+            } else if (action.payload === "Z-A") {
+                const orderByName = [...state.allPokemons].sort((prev,next) => {
+                    if(prev.name > next.name) return -1;
+                    if(prev.name < next.name) return 1;
+                    return 0;
+                });
+                return {
+                    ...state,
+                    pokemon: [...orderByName]
+                }
+            }
+            
             return {
                 ...state,
-                pokemonFilter: [...sortName]
+                pokemon: [...sortName]
             }
 
         case ORDER_ATTACK:
@@ -78,7 +106,7 @@ const reducer = (state = initialState, action) => {
                 : [...state.allPokemons].sort((a, b) => b.attack - a.attack)
             return {
                 ...state,
-                pokemonFilter: sortAttack
+                pokemon: [...sortAttack]
             }
 
         case FILTER_POKEMONS:
@@ -87,7 +115,7 @@ const reducer = (state = initialState, action) => {
                 : [...state.allPokemons].filter((e) => !e.createPokemonDb)
             return {
                 ...state,
-                pokemonFilter: action.payload === "all" ? [...state.allPokemons] : filterApiOrDb
+                pokemon: action.payload === "all" ? [...state.allPokemons] : filterApiOrDb
             }
 
         default:
@@ -99,3 +127,31 @@ const reducer = (state = initialState, action) => {
 };
 
 export default reducer;
+/*
+{
+    allPokemons.length ? (
+        allPokemons.slice(
+                            (paginate - 1) * cantPokemons,
+                            (paginate - 1) * cantPokemons + cantPokemons
+                        ).map((p) => {
+                            return (
+                                <Pokemon
+                                    key={p.id}
+                                    id={p.id}
+                                    name={p.name}
+                                    image={p.image}
+                                    types={p.types}
+                                />
+                            )
+                        })
+    ) : notFound ? (
+        <div>
+        <p> POKEMON NOT FOUND </p>
+        </div>
+    ) : (
+        <div>
+        <p> cargando... </p>
+        </div>
+    )
+}
+*/

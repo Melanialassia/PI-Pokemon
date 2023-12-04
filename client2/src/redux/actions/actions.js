@@ -26,7 +26,7 @@ export const getAllPokemons = () => {
 export const getDetailPokemon = (id) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`http://localhost:3001/pokemons/${id}`)
+            const { data } = await axios.get("http://localhost:3001/pokemons/" + id)
             return dispatch({ type: GET_DETAIL_POKEMON, payload: data });
         } catch (error) {
             console.log(error);
@@ -37,12 +37,13 @@ export const getDetailPokemon = (id) => {
 export const getPokemonName = (name) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`http://localhost:3001/pokemons/?name=${name}`);
+            const { data } = await axios.get("http://localhost:3001/pokemons/?name=" + name);
+            console.log("action", data);
             return dispatch({ type: GET_NAME_POKEMON, payload: data });
-        }catch (error){
-            console.log(error);
-        }
-    };
+        } catch (error) {
+            return dispatch({ type: GET_NAME_POKEMON, payload: { error: error } });
+        };
+    }
 };
 
 export const getTypes = () => {
@@ -56,14 +57,15 @@ export const getTypes = () => {
     };
 };
 
-export const createPokemon = (input) => {
+export const createPokemon = (info) => {
     return async () => {
         try {
-            const response = await axios.post('http://localhost:3001/pokemons/create', input);
+            const response = await axios.post('http://localhost:3001/pokemons/create', info);
             alert("Pokemon creado con exito");
             return response;
         } catch (error) {
             console.log(error);
+            alert(error.response.data.error);
         }
     };
 };

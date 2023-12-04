@@ -1,7 +1,7 @@
 
 const validate = (input) => {
     let errors = {};
-    let regexImage = /^(http|https):\/\/[^\s]+(\.jpg|\.jpeg|\.png|\.gif)$/;
+    let regexImage = /^(http|https):\/\/[^\s]+\.png$/
     let regexNumber = /^([0-9])*$/;
 
     if (!input.name) {
@@ -17,8 +17,8 @@ const validate = (input) => {
     };
 
     if (!regexImage.test(input.image)) {
-        errors.image = "Ingrese una url valida";
-    };
+        errors.image = "Ingrese una URL de imagen PNG válida";
+    }
 
     if (!input.hp) {
         errors.hp = "Campo obligatorio";

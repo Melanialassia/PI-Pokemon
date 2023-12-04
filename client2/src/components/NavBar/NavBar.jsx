@@ -5,7 +5,7 @@ const NavBar = () => {
     return (
         <div>
             <Link to={"/create"}>
-            <button>Crearte</button>
+            <button>New Pokemon +</button>
             </Link>
             <SearchBar/>
         </div>
