@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-image: url('https://e1.pxfuel.com/desktop-wallpaper/661/885/desktop-wallpaper-nature-pokemon-and-mobile-backgrounds-pokemon-landscape.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.homeContainer {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.filterContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  align-items: center; 
+  margin-top: 30px;
+  background-color: rgba(223, 27, 27, 0.797);
+  padding: 10px; 
+  border-radius: 50px; 
+}
+
+.filterContainer select {
+  margin-right: 10px;
+  padding: 9px;
+  font-size: 15px;
+  background-color: rgba(228, 215, 38, 0.793);
+  border: none;
+  border-radius: 15px;
+}
+
+.filterContainer select option {
+  color: #fff;
+}
+
+.filterContainer button {
+  margin: 0 5px;
+  padding: 8px 12px;
+  background-color: rgba(253, 211, 3, 0.5);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.filterContainer button:hover {
+  background-color: rgba(253, 211, 3, 0.8);
+}
+
+.pokemonList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.pokemonCard {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.pokemonImage {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.pokemonName {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.paginationContainer {
+  margin-top: 20px;
+}
+
+.reloadButton,
+.filterContainer button {
+  background-color: #3498db;
+  color: #fff;
+  font-size: 16px;
+}
+
+.reloadButton:hover,
+.filterContainer button:hover {
+  background-color: #2980b9;
+}
+
+.reloadButton {
+  margin-right: 10px; 
+  background-color: rgba(255, 0, 0, 0.7);
+}
+
+.logoPokemon {
+  position: absolute; 
+  width: 200px; 
+  top: 20px; 
+  left: 20px; 
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh; 
+}
+
+.loadingContainer img {
+  position: fixed; 
+  top: 40%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 300px;
+  height: 100px;
+}
+
+.loadingText {
+  position: absolute; 
+  top: 500px; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  font-size: 25px;
+  color: #333;
+}

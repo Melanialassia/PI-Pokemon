@@ -1,4 +1,3 @@
-
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,17 +8,22 @@ const Detail = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const pokemonDetail = useSelector((state) => state.detail);
- 
+
     useEffect(() => {
         dispatch(getDetailPokemon(id));
         return () => dispatch(cleanDetail());
     }, []);
 
     return (
-        <div>
+        <div >
+            <div >
+                <Link to={"/home"}>
+                    <button>Volver</button>
+                </Link>
+            </div>
             {
                 Object.keys(pokemonDetail).length > 0 ? (
-                    <div>
+                    <div >
                         <h1>{pokemonDetail.name ? pokemonDetail.name : "No encontrado"}</h1>
                         <img
                             src={pokemonDetail.image}
@@ -27,25 +31,23 @@ const Detail = () => {
                             style={{ maxWidth: "200px", maxHeight: "200px" }}
                         />
                         <p>Tipo: {pokemonDetail.types.join(" ")}</p>
-                        <span>HP: {pokemonDetail.hp}</span>
+                        <p>HP: {pokemonDetail.hp}</p>
                         <br />
-                        <span>Ataque: {pokemonDetail.attack}</span>
+                        <p>Ataque: {pokemonDetail.attack}</p>
                         <br />
-                        <span>Defensa: {pokemonDetail.defense}</span>
+                        <p>Defensa: {pokemonDetail.defense}</p>
                         <br />
-                        <span>Velocidad: {pokemonDetail.speed}</span>
+                        <p>Velocidad: {pokemonDetail.speed}</p>
                         <br />
-                        <span>Altura: {pokemonDetail.height}</span>
+                        <p>Altura: {pokemonDetail.height}</p>
                     </div>
                 ) : (
-                    <div>
+                    <div >
+                        <img />
                         <p>cargando...</p>
                     </div>
                 )
             }
-            <Link to={"/home"}>
-            <button>Volver</button>
-            </Link>
         </div>
     );
 };

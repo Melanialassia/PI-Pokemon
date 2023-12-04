@@ -1,0 +1,23 @@
+nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  button {
+    margin: 0 5px; 
+    padding: 8px 12px; 
+    background-color: rgba(253, 211, 3, 0.5); 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  button:not(:last-child) {
+    margin-right: 12px; 
+  }
+  
+  button:hover {
+    background-color: rgba(253, 211, 3, 0.8); 
+  }

@@ -13,10 +13,10 @@ import {
 const initialState = {
     allPokemons: [],
     pokemon: [],
-    notFound: false,
     types: [],
-    detail: {}
-
+    detail: {},
+    notFound: false,
+    searching: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -25,7 +25,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 allPokemons: action.payload,
-                pokemon:  [...action.payload]
+                pokemon: [...action.payload],
+                notFound: false
             }
 
         case GET_DETAIL_POKEMON:
@@ -43,6 +44,7 @@ const reducer = (state = initialState, action) => {
             }
 
         case GET_NAME_POKEMON:
+            console.log("entre", action.payload);
             if (action.payload.error) {
                 return {
                     ...state,
@@ -52,9 +54,9 @@ const reducer = (state = initialState, action) => {
             } else {
                 return {
                     ...state,
-                    pokemon: action.payload,
+                    pokemon: state.allPokemons.filter((p) => p.name === action.payload),
                     notFound: false
-                }
+                  }
             }
 
         case GET_TYPES:
@@ -65,57 +67,52 @@ const reducer = (state = initialState, action) => {
 
         case FILTER_TYPE:
             const filterTypes = action.payload === "all"
-                ? [...state.allPokemons]
-                : [...state.allPokemons].filter((p) => p.types.includes(action.payload))
+                ? state.allPokemons
+                : state.allPokemons.filter((p) => p.types.includes(action.payload))
             return {
                 ...state,
-                pokemon: [...filterTypes]
+                pokemon: filterTypes
             }
 
         case ORDER_NAME:
             if(action.payload === "A-Z"){
-                const orderByName = [...state.allPokemons].sort((prev,next) => {
+                const orderByName = [...state.pokemon].sort((prev, next) => {
                     if(prev.name > next.name) return 1;
                     if(prev.name < next.name) return -1;
                     return 0;
-                });
+                })
                 return {
                     ...state,
                     pokemon: [...orderByName]
                 }
-            } else if (action.payload === "Z-A") {
-                const orderByName = [...state.allPokemons].sort((prev,next) => {
+            } else if(action.payload === "Z-A") {
+                const orderByName = [...state.pokemon].sort((prev, next) => {
                     if(prev.name > next.name) return -1;
                     if(prev.name < next.name) return 1;
                     return 0;
-                });
+                })
                 return {
                     ...state,
                     pokemon: [...orderByName]
                 }
-            }
-            
-            return {
-                ...state,
-                pokemon: [...sortName]
             }
 
         case ORDER_ATTACK:
             const sortAttack = action.payload === "min"
-                ? [...state.allPokemons].sort((a, b) => a.attack - b.attack)
-                : [...state.allPokemons].sort((a, b) => b.attack - a.attack)
+                ? [...state.pokemon].sort((a, b) => a.attack - b.attack)
+                : [...state.pokemon].sort((a, b) => b.attack - a.attack)
             return {
                 ...state,
-                pokemon: [...sortAttack]
+                pokemon: sortAttack
             }
 
         case FILTER_POKEMONS:
             const filterApiOrDb = action.payload === "created"
-                ? [...state.allPokemons].filter((e) => e.createPokemonDb)
-                : [...state.allPokemons].filter((e) => !e.createPokemonDb)
+                ? state.allPokemons.filter((e) => e.createPokemonDb)
+                : state.allPokemons.filter((e) => !e.createPokemonDb)
             return {
                 ...state,
-                pokemon: action.payload === "all" ? [...state.allPokemons] : filterApiOrDb
+                pokemon: action.payload === "all" ? state.allPokemons : filterApiOrDb
             }
 
         default:
@@ -127,31 +124,3 @@ const reducer = (state = initialState, action) => {
 };
 
 export default reducer;
-/*
-{
-    allPokemons.length ? (
-        allPokemons.slice(
-                            (paginate - 1) * cantPokemons,
-                            (paginate - 1) * cantPokemons + cantPokemons
-                        ).map((p) => {
-                            return (
-                                <Pokemon
-                                    key={p.id}
-                                    id={p.id}
-                                    name={p.name}
-                                    image={p.image}
-                                    types={p.types}
-                                />
-                            )
-                        })
-    ) : notFound ? (
-        <div>
-        <p> POKEMON NOT FOUND </p>
-        </div>
-    ) : (
-        <div>
-        <p> cargando... </p>
-        </div>
-    )
-}
-*/

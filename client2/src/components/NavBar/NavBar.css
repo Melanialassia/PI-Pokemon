@@ -1,0 +1,25 @@
+.navBarContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .searchBarContainer {
+    flex-grow: 1; 
+  }
+  
+  .createPokemonButton {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  .createPokemonButton:hover {
+    background-color: #2980b9;
+  }
