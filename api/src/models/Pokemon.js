@@ -5,9 +5,10 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Pokemon', {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
@@ -31,7 +32,6 @@ module.exports = (sequelize) => {
     },
     speed: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     height: {
       type: DataTypes.INTEGER
