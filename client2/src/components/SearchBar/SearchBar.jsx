@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getPokemonName } from "../../redux/actions/actions";
-import "./SearchBar.css"; // Importa el archivo CSS
+import "./SearchBar.css"; 
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -11,8 +11,7 @@ const SearchBar = () => {
     setNamePokemon(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     dispatch(getPokemonName(namePokemon));
   };
 
@@ -23,7 +22,7 @@ const SearchBar = () => {
         placeholder="Ingrese Pokemon..."
         onChange={(event) => handleChange(event)}
       />
-      <button type="submit" onClick={(event) => handleSubmit(event)}>
+      <button type="submit" onClick={handleSubmit}>
         Buscar
       </button>
     </div>

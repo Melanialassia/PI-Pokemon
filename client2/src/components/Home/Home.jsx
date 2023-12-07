@@ -11,13 +11,14 @@ import {
   filterPokemons,
   filterType,
 } from '../../redux/actions/actions';
-import Pokemon from '../Pokemon/Pokemon';
 import Paginate from '../Paginate/Paginate';
 import NavBar from '../NavBar/NavBar';
+import Cards from '../Cards/Cards';
 
 
 const Home = () => {
   const allPokemons = useSelector((state) => state.pokemon);
+  console.log("renderizado", allPokemons);
   const allTypes = useSelector((state) => state.types);
   const notFound = useSelector((state) => state.notFound);
   const dispatch = useDispatch();
@@ -62,8 +63,8 @@ const Home = () => {
     }
   };
 
-  const handlerClick = (event) => {
-    event.preventDefault();
+  const handlerClick = (e) => {
+    e.preventDefault();
     dispatch(getAllPokemons());
   };
 
@@ -72,7 +73,7 @@ const Home = () => {
       <img src={logoPokemon} alt="Logo Pokemon" className="logoPokemon" />
       <NavBar />
       <div className="filterContainer">
-        <button onClick={(event) => handlerClick(event)} className="reloadButton">
+        <button onClick={(e) => handlerClick(e)} className="reloadButton">
           Recargar
         </button>
         <select onChange={(event) => handlerTypes(event)}>
@@ -101,19 +102,8 @@ const Home = () => {
         </select>
       </div>
       <div className="pokemonList">
-        {allPokemons.length ? (
-          allPokemons.slice(
-            (paginate - 1) * cantPokemons,
-            (paginate - 1) * cantPokemons + cantPokemons)
-            .map((p) => (
-              <Pokemon
-                key={p.id}
-                id={p.id}
-                name={p.name}
-                image={p.image}
-                types={p.types}
-              />
-            ))
+      {allPokemons.length ? (
+          <Cards allPokemons={allPokemons} paginate={paginate} cantPokemons={cantPokemons}/>
         ) : notFound ? (
           <div>
             <p> POKEMON NOT FOUND </p>
@@ -127,7 +117,7 @@ const Home = () => {
       </div>
       <div className="paginationContainer">
         <Paginate paginate={paginate} setPaginate={setPaginate} totalPages={totalPages} />
-      </div>
+      </div>  
     </div>
   );
 };

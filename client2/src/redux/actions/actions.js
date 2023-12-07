@@ -41,7 +41,7 @@ export const getPokemonName = (name) => {
             console.log("action", data);
             return dispatch({ type: GET_NAME_POKEMON, payload: data });
         } catch (error) {
-            return dispatch({ type: GET_NAME_POKEMON, payload: { error: error } });
+            console.log(error);
         };
     }
 };

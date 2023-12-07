@@ -16,7 +16,6 @@ const initialState = {
     types: [],
     detail: {},
     notFound: false,
-    searching: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -52,11 +51,12 @@ const reducer = (state = initialState, action) => {
                     notFound: true
                 }
             } else {
+
                 return {
                     ...state,
-                    pokemon: state.allPokemons.filter((p) => p.name === action.payload),
+                    pokemon: action.payload,
                     notFound: false
-                  }
+                }
             }
 
         case GET_TYPES:
@@ -75,20 +75,20 @@ const reducer = (state = initialState, action) => {
             }
 
         case ORDER_NAME:
-            if(action.payload === "A-Z"){
+            if (action.payload === "A-Z") {
                 const orderByName = [...state.pokemon].sort((prev, next) => {
-                    if(prev.name > next.name) return 1;
-                    if(prev.name < next.name) return -1;
+                    if (prev.name > next.name) return 1;
+                    if (prev.name < next.name) return -1;
                     return 0;
                 })
                 return {
                     ...state,
                     pokemon: [...orderByName]
                 }
-            } else if(action.payload === "Z-A") {
+            } else if (action.payload === "Z-A") {
                 const orderByName = [...state.pokemon].sort((prev, next) => {
-                    if(prev.name > next.name) return -1;
-                    if(prev.name < next.name) return 1;
+                    if (prev.name > next.name) return -1;
+                    if (prev.name < next.name) return 1;
                     return 0;
                 })
                 return {

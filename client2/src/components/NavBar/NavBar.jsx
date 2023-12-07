@@ -3,6 +3,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import "./NavBar.css"; 
 
 const NavBar = () => {
+  
   return (
     <div className="navBarContainer">
       <div className="searchBarContainer">
