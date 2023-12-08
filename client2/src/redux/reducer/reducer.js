@@ -15,8 +15,7 @@ const initialState = {
     allPokemons: [],
     pokemon: [],
     types: [],
-    detail: {},
-    notFound: false,
+    detail: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,7 +25,6 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 allPokemons: action.payload,
                 pokemon: [...action.payload],
-                notFound: false
             }
 
         case GET_DETAIL_POKEMON:
@@ -50,18 +48,10 @@ const reducer = (state = initialState, action) => {
             }
 
         case GET_NAME_POKEMON:
-            if (action.payload.error) {
                 return {
                     ...state,
-                    pokemon: [],
-                    notFound: true
-                }
-            } else {
-                return {
-                    ...state,
-                    pokemon: action.payload,
-                    notFound: false
-                }
+                    pokemon: action.payload
+                
             }
 
         case GET_TYPES:

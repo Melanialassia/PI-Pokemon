@@ -1,6 +1,6 @@
 import './Home.css';
 import logoPokemon from "../../img/pngegg.png";
-import pokeball from "../../img/pokeball.gif";
+// import pokeball from "../../img/pokeball.gif";
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -19,8 +19,6 @@ import Cards from '../Cards/Cards';
 const Home = () => {
   const allPokemons = useSelector((state) => state.pokemon);
   const allTypes = useSelector((state) => state.types);
-  console.log("alltypes", allTypes);
-  const notFound = useSelector((state) => state.notFound);
   const dispatch = useDispatch();
 
   // Paginado
@@ -66,6 +64,7 @@ const Home = () => {
   const handlerClick = (e) => {
     e.preventDefault();
     dispatch(getAllPokemons());
+    setPaginate(1);
   };
 
   return (
@@ -102,22 +101,17 @@ const Home = () => {
         </select>
       </div>
       <div className="pokemonList">
-      {allPokemons.length ? (
-          <Cards allPokemons={allPokemons} paginate={paginate} cantPokemons={cantPokemons}/>
-        ) : notFound ? (
+        {allPokemons.length ?
+          <Cards allPokemons={allPokemons} paginate={paginate} cantPokemons={cantPokemons} />
+          :
           <div>
             <p> POKEMON NOT FOUND </p>
           </div>
-        ) : (
-          <div className="loadingContainer">
-            <img src={pokeball} alt="pokeball" className="logoPokemon" />
-            <p className="loadingText">Cargando...</p>
-          </div>
-        )}
+        }
       </div>
       <div className="paginationContainer">
         <Paginate paginate={paginate} setPaginate={setPaginate} totalPages={totalPages} />
-      </div>  
+      </div>
     </div>
   );
 };
