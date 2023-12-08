@@ -14,13 +14,10 @@ const Pokemon = ({ id, name, image, types }) => {
         />
         <h2 className="pokemonName">{name}</h2>
         <h5 className="types">Tipo
-          <div className="types">
-            {types &&
-              types.map((type, index) => (
-                <div key={index}>
-                  <p>{type.name}</p>
-                </div>
-              ))}</div>
+          <div className="types">{types.map((e, index) => (
+            <p key={index}>{e}</p>
+          ))}
+          </div>
         </h5>
       </Link>
     </div>

@@ -27,7 +27,7 @@ const createPokemonController = async (
   if (!created) throw new Error("Este pokemon ya existe en la DB");
   const typesDb = await Types.findAll({ where: { name: types } });
 
-  pokemon.setTypes(typesDb);
+  pokemon.addTypes(typesDb);
 
   return pokemon;
 };
