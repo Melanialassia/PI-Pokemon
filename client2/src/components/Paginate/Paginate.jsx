@@ -1,4 +1,3 @@
-import React from 'react';
 import './Paginate.css';
 
 const Paginate = ({ setPaginate, totalPages }) => {
@@ -23,4 +22,3 @@ const Paginate = ({ setPaginate, totalPages }) => {
 };
 
 export default Paginate;
-

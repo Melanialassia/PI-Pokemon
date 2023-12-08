@@ -61,7 +61,6 @@ export const getTypes = () => {
 export const createPokemon = (info) => {
     return async (dispatch) => {
         try {
-            console.log(info);
             const response = await axios.post('http://localhost:3001/pokemons/create', info)
             dispatch({ type: CREATE_POKEMON, payload: response.data });
             alert("Pokemon creado con exito");

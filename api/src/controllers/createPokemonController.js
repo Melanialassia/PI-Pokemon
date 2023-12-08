@@ -2,12 +2,12 @@ const { Pokemon, Types } = require('../db');
 
 const createPokemonController = async (
   name,
+  types,
   image,
   hp,
   attack,
   defense,
   speed = null,
-  types,
   height = null,
   weight = null
 ) => {
@@ -27,7 +27,7 @@ const createPokemonController = async (
   if (!created) throw new Error("Este pokemon ya existe en la DB");
   const typesDb = await Types.findAll({ where: { name: types } });
 
-  pokemon.addTypes(typesDb);
+  pokemon.setTypes(typesDb);
 
   return pokemon;
 };

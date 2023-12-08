@@ -18,7 +18,6 @@ import Cards from '../Cards/Cards';
 
 const Home = () => {
   const allPokemons = useSelector((state) => state.pokemon);
-  console.log("renderizado", allPokemons);
   const allTypes = useSelector((state) => state.types);
   const notFound = useSelector((state) => state.notFound);
   const dispatch = useDispatch();

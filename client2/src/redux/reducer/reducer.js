@@ -37,6 +37,7 @@ const reducer = (state = initialState, action) => {
             }
 
         case CREATE_POKEMON:
+        
             return {
                 ...state,
                 pokemon: action.payload
@@ -49,7 +50,6 @@ const reducer = (state = initialState, action) => {
             }
 
         case GET_NAME_POKEMON:
-            console.log("entre", action.payload);
             if (action.payload.error) {
                 return {
                     ...state,
@@ -57,7 +57,6 @@ const reducer = (state = initialState, action) => {
                     notFound: true
                 }
             } else {
-
                 return {
                     ...state,
                     pokemon: action.payload,

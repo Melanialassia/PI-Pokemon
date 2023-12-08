@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Pokemon } = require('../db');
+const { Pokemon, Types } = require('../db');
 
 const getPokemonController = async (nameToLowerCase) => {
     if (nameToLowerCase) {
@@ -34,9 +34,6 @@ const getPokemonController = async (nameToLowerCase) => {
         const apiResponse = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=100&offset=0");
         const apiPokemons = apiResponse.data.results;
 
-        // Obtener todos los Pokémon de la base de datos
-        const dbPokemons = await Pokemon.findAll();
-
         // Mapear los Pokémon de la API
         const apiDataPokemon = apiPokemons.map(async (e) => {
             const info = await axios.get(e.url);
@@ -55,12 +52,20 @@ const getPokemonController = async (nameToLowerCase) => {
             };
         });
 
-        
+        // Obtener todos los Pokémon de la base de datos
+        const dbPokemons = await Pokemon.findAll({
+            //busco en la tabla los modelos que necesito
+            include:{
+             model: Types,
+             atributes: ["name"]
+            }
+     });
+
         const dbDataPokemon = dbPokemons.map((p) => {
             return {
                 id: p.id,
                 name: p.name,
-                types: p.types,
+                types: p.Types.map((t) => t.name),
                 image: p.image,
                 hp: p.hp,
                 attack: p.attack,
