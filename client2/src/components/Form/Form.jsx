@@ -27,15 +27,6 @@ const Form = () => {
 
     const [errors, setErrors] = useState({});
 
-    const disable = () => {
-        for (let error in errors) {
-            if (errors[error] !== "") {
-                return true; // Deshabilita el botón si hay algún error
-            }
-        }
-        return false; // Habilita el botón si no hay errores
-    };
-
     const handleChange = (event) => {
         setInput({
             ...input,
@@ -53,11 +44,11 @@ const Form = () => {
             ...input,
             types: [...input.types, event.target.value]
         });
-       
-        if(input.types.length>1){
-           setInput({
-            ...input,
-           })
+
+        if (input.types.length > 1) {
+            setInput({
+                ...input,
+            })
             setErrors(validate({
                 ...input,
                 [event.target.name]: event.target.value
@@ -75,24 +66,23 @@ const Form = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-    
-        if(input.length) {
-              dispatch(createPokemon(input));
-        setInput({
-            name: "",
-            image: "",
-            hp: "",
-            attack: "",
-            defense: "",
-            speed: "",
-            height: "",
-            weight: "",
-            types: []
-        });
-        }else {
-          alert("no se puede")
+        if (Object.keys(errors).length === 0) {
+            dispatch(createPokemon(input));
+            setInput({
+                name: "",
+                image: "",
+                hp: "",
+                attack: "",
+                defense: "",
+                speed: "",
+                types: [],
+                height: "",
+                weight: ""
+            });
+        } else {
+            alert("no se puede")
         }
-        
+
     };
 
     return (
@@ -250,7 +240,7 @@ const Form = () => {
                 </div>
                 <br />
                 <br />
-                <button type="submit" disabled={disable()} >Crear</button>
+                <button type="submit"  >Crear</button>
                 <br />
                 <br />
             </form >

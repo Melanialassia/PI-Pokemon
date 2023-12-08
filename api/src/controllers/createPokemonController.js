@@ -7,10 +7,9 @@ const createPokemonController = async (
   attack,
   defense,
   speed = null,
+  types,
   height = null,
-  weight = null,
-  createPokemonDb,
-  types
+  weight = null
 ) => {
   const [pokemon, created] = await Pokemon.findOrCreate({
     where: { name },
@@ -22,8 +21,7 @@ const createPokemonController = async (
       defense,
       speed,
       height,
-      weight,
-      createPokemonDb,
+      weight
     },
   });
   if (!created) throw new Error("Este pokemon ya existe en la DB");
@@ -36,7 +34,7 @@ const createPokemonController = async (
 
 
 module.exports = {
-    createPokemonController
+  createPokemonController
 };
 // {
 //     "name" : "Melani",

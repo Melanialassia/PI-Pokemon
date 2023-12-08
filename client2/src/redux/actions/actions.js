@@ -3,6 +3,7 @@ import {
     GET_DETAIL_POKEMON,
     GET_NAME_POKEMON,
     GET_TYPES,
+    CREATE_POKEMON,
     CLEAN_DETAIL,
     FILTER_TYPE,
     ORDER_NAME,
@@ -58,14 +59,16 @@ export const getTypes = () => {
 };
 
 export const createPokemon = (info) => {
-    return async () => {
+    return async (dispatch) => {
         try {
-            const response = await axios.post('http://localhost:3001/pokemons/create', info);
+            console.log(info);
+            const response = await axios.post('http://localhost:3001/pokemons/create', info)
+            dispatch({ type: CREATE_POKEMON, payload: response.data });
             alert("Pokemon creado con exito");
             return response;
         } catch (error) {
             console.log(error);
-            alert(error.response.data.error);
+            alert(error.message);
         }
     };
 };

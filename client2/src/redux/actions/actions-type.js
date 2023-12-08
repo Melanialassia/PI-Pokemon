@@ -1,6 +1,7 @@
 export const GET_ALL_POKEMONS = "GET_ALL_POKEMONS";
 export const GET_DETAIL_POKEMON = "GET_DETAIL_POKEMON";
 export const GET_NAME_POKEMON = "GET_NAME_POKEMON";
+export const CREATE_POKEMON = "CREATE_POKEMON";
 export const GET_TYPES = "GET_TYPES";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const FILTER_TYPE = "FILTER_TYPE"

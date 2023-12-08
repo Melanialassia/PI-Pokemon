@@ -4,6 +4,7 @@ import {
     GET_NAME_POKEMON,
     GET_TYPES,
     CLEAN_DETAIL,
+    CREATE_POKEMON,
     FILTER_TYPE,
     ORDER_NAME,
     ORDER_ATTACK,
@@ -35,6 +36,11 @@ const reducer = (state = initialState, action) => {
                 detail: action.payload
             }
 
+        case CREATE_POKEMON:
+            return {
+                ...state,
+                pokemon: action.payload
+            }
 
         case CLEAN_DETAIL:
             return {
