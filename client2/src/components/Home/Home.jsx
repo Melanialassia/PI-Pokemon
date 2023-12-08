@@ -19,6 +19,7 @@ import Cards from '../Cards/Cards';
 const Home = () => {
   const allPokemons = useSelector((state) => state.pokemon);
   const allTypes = useSelector((state) => state.types);
+  console.log("alltypes", allTypes);
   const notFound = useSelector((state) => state.notFound);
   const dispatch = useDispatch();
 
