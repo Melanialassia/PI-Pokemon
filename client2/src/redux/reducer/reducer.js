@@ -102,14 +102,24 @@ const reducer = (state = initialState, action) => {
             }
 
         case FILTER_POKEMONS:
-            const filterApiOrDb = action.payload === "created"
-                ? state.allPokemons.filter((e) => e.createPokemonDb)
-                : state.allPokemons.filter((e) => !e.createPokemonDb)
-            return {
-                ...state,
-                pokemon: action.payload === "all" ? state.allPokemons : filterApiOrDb
+            if(action.payload === "api") {
+                const apiPokemons = state.allPokemons.slice(0, 100);
+                return {
+                    ...state,
+                    pokemon: apiPokemons
+                };
+            } else if( action.payload === "created") {
+                const userCreatedPokemons = state.allPokemons.slice(100);
+                return {
+                    ...state,
+                    pokemon:userCreatedPokemons
+                };
+            } else {
+                return {
+                    ...state,
+                    pokemon: [...state.allPokemons]
+                }
             }
-
         default:
             return {
                 ...state

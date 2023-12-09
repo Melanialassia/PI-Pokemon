@@ -37,13 +37,16 @@ module.exports = {
   createPokemonController
 };
 // {
-//     "name" : "Melani",
-//     "image" : "https://pokeapi.co/api/v2/pokemon-species/132/",
-//     "hp": 200,
-//     "attack": 300,
-//     "defense": 400,
-//     "speed":34,
-//     "height": 499,
-//      "types" : ["normal", "poison"]
-//     "weight": 6
-//   }
+  // "name": "gg",
+  // "types": [
+  //   "psychic",
+  //   "dark"
+  // ],
+  // "image": "https://w7.pngwing.com/pngs/678/671/png-transparent-pokemon-go-pokemon-red-and-blue-eevee-pokedex-pokemon-go-mammal-carnivoran-dog-like-mammal-thumbnail.png",
+  // "hp": 23,
+  // "attack": 23,
+  // "defense": 23,
+  // "speed": 23,
+  // "height": 23,
+  // "weight": 23
+// }

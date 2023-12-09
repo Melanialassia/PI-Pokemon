@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTypes, createPokemon } from "../../redux/actions/actions";
 import { Link } from "react-router-dom";
 import validate from "./validate";
+import "./Form.css";
 
 
 const Form = () => {
@@ -80,34 +81,36 @@ const Form = () => {
                 weight: ""
             });
         } else {
-            alert("no se puede")
+            alert("Tienes que llenar los campos obligatorios")
         }
-
     };
 
     return (
-        <div>
-            <div>
-                <Link to={"/home"}>
-                    <button >Volver</button>
-                </Link>
-            </div>
+        <div className="container">
+            <Link to={"/home"} >
+                <button >Volver</button>
+            </Link>
             <form onSubmit={(event) => handleSubmit(event)}>
                 <h1>Crea tu pokemon</h1>
-                <div>
-                    <label htmlFor="name"> Nombre: </label>
-                    <input
-                        id="name"
-                        type="text"
-                        name="name"
-                        value={input.name}
-                        onChange={handleChange}
-                    />
+                <div className="formGroup">
+                    <label htmlFor="name">Nombre:</label>
+                    <div className="inputContainer">
+                        <input
+                            id="name"
+                            type="text"
+                            name="name"
+                            value={input.name}
+                            onChange={handleChange}
+                            className="formInput"
+                        />
+                    </div>
+                    {errors.name && (
+                        <div className="errorContainer">
+                            <p className="errorText">{errors.name}</p>
+                        </div>
+                    )}
                 </div>
-                <div>
-                    {errors.name && <p>{errors.name}</p>}
-                </div>
-                <br />
+
                 <div>
                     <label htmlFor="image">Imagen: </label>
                     <input
@@ -117,12 +120,10 @@ const Form = () => {
                         name="image"
                         value={input.image}
                         onChange={(event) => handleChange(event)}
-                    />
+                        className="formInput"
+                    /> {errors.image && <p className="errorText">{errors.image}</p>}
                 </div>
-                <div>
-                    {errors.image && <p>{errors.image}</p>}
-                </div>
-                <br />
+
                 <div>
                     <label htmlFor="hp">Hp: </label>
                     <input
@@ -131,12 +132,10 @@ const Form = () => {
                         name="hp"
                         value={input.hp}
                         onChange={(event) => handleChange(event)}
-                    />
+                        className="formInput"
+                    /> {errors.hp && <p className="errorText">{errors.hp}</p>}
                 </div>
-                <div>
-                    {errors.hp && <p>{errors.hp}</p>}
-                </div>
-                <br />
+
                 <div>
                     <label htmlFor="attack">Ataque: </label>
                     <input
@@ -145,13 +144,10 @@ const Form = () => {
                         name="attack"
                         value={input.attack}
                         onChange={(event) => handleChange(event)}
-                    />
+                        className="formInput"
+                    />{errors.attack && <p className="errorText">{errors.attack}</p>}
                 </div>
-                <div>
-                    {errors.attack && <p>{errors.attack}</p>}
 
-                </div>
-                <br />
                 <div>
                     <label htmlFor="defense"> Defensa: </label>
                     <input
@@ -160,12 +156,10 @@ const Form = () => {
                         name="defense"
                         value={input.defense}
                         onChange={(event) => handleChange(event)}
-                    />
+                        className="formInput"
+                    />{errors.defense && <p className="errorText">{errors.defense}</p>}
                 </div>
-                <div>
-                    {errors.defense && <p>{errors.defense}</p>}
-                </div>
-                <br />
+
                 <div>
                     <label htmlFor="speed">Velocidad: </label>
                     <input
@@ -174,13 +168,10 @@ const Form = () => {
                         name="speed"
                         value={input.speed}
                         onChange={(event) => handleChange(event)}
-                    />
+                        className="formInput"
+                    /> {errors.speed && <p className="errorText">{errors.speed}</p>}
                 </div>
-                <div>
-                    {errors.speed && <p>{errors.speed}</p>}
 
-                </div>
-                <br />
                 <div>
                     <label htmlFor="height">Altura: </label>
                     <input
@@ -189,12 +180,10 @@ const Form = () => {
                         name="height"
                         value={input.height}
                         onChange={(event) => handleChange(event)}
-                    />
+                        className="formInput"
+                    /> {errors.height && <p className="errorText">{errors.height}</p>}
                 </div>
-                <div>
-                    {errors.height && <p>{errors.height}</p>}
-                </div>
-                <br />
+
                 <div>
                     <label htmlFor="weight">Peso: </label>
                     <input
@@ -203,12 +192,10 @@ const Form = () => {
                         name="weight"
                         value={input.weight}
                         onChange={(event) => handleChange(event)}
-                    />
+                        className="formInput"
+                    /> {errors.weight && <p className="errorText">{errors.weight}</p>}
                 </div>
-                <div>
-                    {errors.weight && <p>{errors.weight}</p>}
-                </div>
-                <br />
+
                 <div>
                     <label htmlFor="types">
                         Seleccione los tipos: </label>
@@ -223,10 +210,10 @@ const Form = () => {
                                 </option>
                             ))
                         }
-                    </select>
+                    </select>{errors.types && <p className="errorText">{errors.types}</p>}
                 </div>
                 <div>
-                    {errors.types && <p>{errors.types}</p>}
+
                 </div>
                 <div>
                     {
@@ -240,7 +227,7 @@ const Form = () => {
                 </div>
                 <br />
                 <br />
-                <button type="submit"  >Crear</button>
+                <button type="submit"> Crear</button>
                 <br />
                 <br />
             </form >
