@@ -17,9 +17,9 @@
 }
 
 .enterButton {
-    background-color: #fbd303; 
-    box-shadow: 0 0 20px rgba(226, 211, 81, 0.8);
-    color: #fff; 
+    background-color: #fbd203d7; 
+    box-shadow: 0 0 20px rgb(226, 211, 81);
+    color: #ffffff; 
     padding: 10px 20px; 
     font-size: 18px; 
     border: none;
