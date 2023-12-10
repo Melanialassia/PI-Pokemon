@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getPokemonName } from "../../redux/actions/actions";
-import "./SearchBar.css"; 
+import "./SearchBar.css";
 
-const SearchBar = () => {
+const SearchBar = ({ setPaginate }) => {
   const dispatch = useDispatch();
   const [namePokemon, setNamePokemon] = useState("");
 
@@ -13,6 +13,7 @@ const SearchBar = () => {
 
   const handleSubmit = () => {
     dispatch(getPokemonName(namePokemon));
+    setPaginate(1);
   };
 
   return (

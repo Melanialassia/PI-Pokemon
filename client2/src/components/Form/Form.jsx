@@ -21,6 +21,7 @@ const Form = () => {
         weight: "",
         types: []
     });
+    console.log(input.types);
 
     useEffect(() => {
         dispatch(getTypes());
@@ -86,17 +87,19 @@ const Form = () => {
     };
 
     return (
-        <div className="container">
-            <Link to={"/home"} >
+        <div>
+            <Link to={"/home"} className="button">
                 <button >Volver</button>
             </Link>
+        <div className="container">
             <form onSubmit={(event) => handleSubmit(event)}>
                 <h1>Crea tu pokemon</h1>
                 <div className="formGroup">
-                    <label htmlFor="name">Nombre:</label>
+                    
                     <div className="inputContainer">
                         <input
                             id="name"
+                            placeholder="Nombre"
                             type="text"
                             name="name"
                             value={input.name}
@@ -112,7 +115,6 @@ const Form = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="image">Imagen: </label>
                     <input
                         id="image"
                         placeholder="Imagen .png "
@@ -121,79 +123,107 @@ const Form = () => {
                         value={input.image}
                         onChange={(event) => handleChange(event)}
                         className="formInput"
-                    /> {errors.image && <p className="errorText">{errors.image}</p>}
+                    /> {errors.image &&(
+                        <div className="errorContainer">
+                            <p className="errorText">{errors.image}</p>
+                            </div>
+                    )}
                 </div>
 
                 <div>
-                    <label htmlFor="hp">Hp: </label>
                     <input
                         id="hp"
+                        placeholder="Hp"
                         type="number"
                         name="hp"
                         value={input.hp}
                         onChange={(event) => handleChange(event)}
                         className="formInput"
-                    /> {errors.hp && <p className="errorText">{errors.hp}</p>}
+                    /> {errors.hp && (
+                        <div className="errorContainer"> 
+                           <p className="errorText">{errors.hp}</p> 
+                        </div>
+                    )}
                 </div>
 
                 <div>
-                    <label htmlFor="attack">Ataque: </label>
                     <input
                         id="attack"
+                        placeholder="Ataque"
                         type="number"
                         name="attack"
                         value={input.attack}
                         onChange={(event) => handleChange(event)}
                         className="formInput"
-                    />{errors.attack && <p className="errorText">{errors.attack}</p>}
+                    />{errors.attack && (
+                        <div className="errorContainer">
+                            <p className="errorText">{errors.attack}</p>
+                        </div>
+                    )}
                 </div>
 
                 <div>
-                    <label htmlFor="defense"> Defensa: </label>
                     <input
                         id="defense"
+                        placeholder="Defensa"
                         type="number"
                         name="defense"
                         value={input.defense}
                         onChange={(event) => handleChange(event)}
                         className="formInput"
-                    />{errors.defense && <p className="errorText">{errors.defense}</p>}
+                    />{errors.defense && (
+                        <div className="errorContainer">
+                            <p className="errorText">{errors.defense}</p>
+                        </div>
+                    ) }
                 </div>
 
                 <div>
-                    <label htmlFor="speed">Velocidad: </label>
                     <input
                         id="speed"
+                        placeholder="Velocidad"
                         type="number"
                         name="speed"
                         value={input.speed}
                         onChange={(event) => handleChange(event)}
                         className="formInput"
-                    /> {errors.speed && <p className="errorText">{errors.speed}</p>}
+                    /> {errors.speed && (
+                        <div className="errorContainer">
+                            <p className="errorText">{errors.speed}</p>
+                        </div>
+                    )}
                 </div>
 
                 <div>
-                    <label htmlFor="height">Altura: </label>
                     <input
                         id="height"
+                        placeholder="Altura"
                         type="number"
                         name="height"
                         value={input.height}
                         onChange={(event) => handleChange(event)}
                         className="formInput"
-                    /> {errors.height && <p className="errorText">{errors.height}</p>}
+                    /> {errors.height && (
+                        <div className="errorContainer">
+                            <p className="errorText">{errors.height}</p>
+                        </div>
+                    ) }
                 </div>
 
                 <div>
-                    <label htmlFor="weight">Peso: </label>
                     <input
                         id="weight"
+                        placeholder="Peso"
                         type="number"
                         name="weight"
                         value={input.weight}
                         onChange={(event) => handleChange(event)}
                         className="formInput"
-                    /> {errors.weight && <p className="errorText">{errors.weight}</p>}
+                    /> {errors.weight && (
+                        <div className="errorContainer">
+                           <p className="errorText">{errors.weight}</p> 
+                        </div>
+                    )}
                 </div>
 
                 <div>
@@ -210,7 +240,11 @@ const Form = () => {
                                 </option>
                             ))
                         }
-                    </select>{errors.types && <p className="errorText">{errors.types}</p>}
+                    </select>{errors.types && (
+                        <div className="errorContainer">
+                            <p className="errorText">{errors.types}</p>
+                        </div>
+                    )}
                 </div>
                 <div>
 
@@ -232,6 +266,7 @@ const Form = () => {
                 <br />
             </form >
         </div >
+        </div>
     );
 };
 

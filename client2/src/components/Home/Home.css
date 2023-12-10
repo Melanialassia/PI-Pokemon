@@ -1,5 +1,4 @@
 body {
-  margin: 0;
   font-family: 'Montserrat', sans-serif;
   background-image: url('https://e1.pxfuel.com/desktop-wallpaper/661/885/desktop-wallpaper-nature-pokemon-and-mobile-backgrounds-pokemon-landscape.jpg');
   background-size: cover;
@@ -40,7 +39,7 @@ body {
 .filterContainer button {
   margin: 0 5px;
   padding: 8px 12px;
-  background-color: rgba(253, 211, 3, 0.5);
+  background-color: rgba(215, 253, 3, 0.5);
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -48,14 +47,16 @@ body {
 }
 
 .filterContainer button:hover {
-  background-color: rgba(253, 211, 3, 0.8);
+  background-color: rgba(197, 225, 16, 0.8);
 }
 
 .pokemonImage {
   width: 100%;
   height: 150px;
+  position: absolute;
   object-fit: cover;
   border-radius: 8px;
+  margin-top: 150px;
 }
 
 .pokemonName {
@@ -72,7 +73,7 @@ body {
 .filterContainer button {
   background-color: #3498db;
   color: #fff;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .reloadButton:hover,
@@ -107,13 +108,4 @@ body {
   transform: translate(-50%, -50%); 
   width: 300px;
   height: 100px;
-}
-
-.loadingText {
-  position: absolute; 
-  top: 500px; 
-  left: 50%; 
-  transform: translateX(-50%); 
-  font-size: 25px;
-  color: #333;
 }

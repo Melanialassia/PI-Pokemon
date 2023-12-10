@@ -1,6 +1,6 @@
 import './Home.css';
 import logoPokemon from "../../img/pngegg.png";
-// import pokeball from "../../img/pokeball.gif";
+import pikachu from "../../img/pikachu corriendo.gif";
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -14,6 +14,7 @@ import {
 import Paginate from '../Paginate/Paginate';
 import NavBar from '../NavBar/NavBar';
 import Cards from '../Cards/Cards';
+import { Link } from 'react-router-dom';
 
 
 const Home = () => {
@@ -71,7 +72,7 @@ const Home = () => {
   return (
     <div className="homeContainer">
       <img src={logoPokemon} alt="Logo Pokemon" className="logoPokemon" />
-      <NavBar />
+      <NavBar setPaginate={setPaginate}/>
       <div className="filterContainer">
         <button onClick={(e) => handlerClick(e)} className="reloadButton">
           Recargar
@@ -106,6 +107,7 @@ const Home = () => {
           <Cards allPokemons={allPokemons} paginate={paginate} cantPokemons={cantPokemons} />
           :
           <div>
+            <img src={pikachu} alt="pikachu" className='pokemonImage'/>
             <p> POKEMON NOT FOUND </p>
           </div>
         }

@@ -10,7 +10,6 @@ const Pokemon = ({ id, name, image, types }) => {
         <img
           src={image}
           alt={name}
-          className="pokemonImage"
         />
         <h2 className="pokemonName">{name}</h2>
         <h5 className="types">Tipo

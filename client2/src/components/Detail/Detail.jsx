@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetailPokemon, cleanDetail } from "../../redux/actions/actions";
 import { Link } from "react-router-dom";
+import "./Detail.css"
+import charmander from "../../img/charmander.gif";
 
 const Detail = () => {
     const { id } = useParams();
@@ -15,13 +17,14 @@ const Detail = () => {
     }, []);
 
     return (
-        <div >
+        <div className="detailContainer">
             <div >
-                <Link to={"/home"}>
+                <Link to={"/home"} className="backButton">
                     <button>Volver</button>
                 </Link>
             </div>
-            {
+            <div className="pokemonCard">
+              {
                 Object.keys(pokemonDetail).length > 0 ? (
                     <div >
                         <h1>{pokemonDetail.name ? pokemonDetail.name : "No encontrado"}</h1>
@@ -30,24 +33,23 @@ const Detail = () => {
                             alt={pokemonDetail.name}
                             style={{ maxWidth: "200px", maxHeight: "200px" }}
                         />
+                        <br/>
                         <p>Tipo: {pokemonDetail.types.join(" ")}</p>
                         <p>HP: {pokemonDetail.hp}</p>
-                        <br />
                         <p>Ataque: {pokemonDetail.attack}</p>
-                        <br />
                         <p>Defensa: {pokemonDetail.defense}</p>
-                        <br />
                         <p>Velocidad: {pokemonDetail.speed}</p>
-                        <br />
                         <p>Altura: {pokemonDetail.height}</p>
                     </div>
                 ) : (
                     <div >
-                        <img />
+                        <img src={charmander} alt="charmander" />
                         <p>cargando...</p>
                     </div>
                 )
-            }
+            }  
+            </div>
+            
         </div>
     );
 };

@@ -1,14 +1,15 @@
 input[type="search"] {
     padding: 8px;
-    border: 1px solid #000000a0; 
+    border: none;
     border-radius: 8px; 
     background-color: rgba(255, 255, 255, 0.7); 
     margin-right: 5px; 
+    box-shadow: 0 0 20px rgb(222, 52, 52);
   }
   
   button {
     padding: 10px 15px;
-    font-size: 16px; 
+    font-size: 18px; 
     background-color: #3498db;
     color: #fff;
     border: none;

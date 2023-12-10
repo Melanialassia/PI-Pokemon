@@ -80,7 +80,7 @@ const validate = (input) => {
         errors.weight = "Solo se permiten numeros mayores a 0";
     };
 
-    if (input.types.length >= 2) {
+    if (input.types.length >= 3) {
         errors.types = "Solo vas a poder seleccionar 2 tipos";
     };
 

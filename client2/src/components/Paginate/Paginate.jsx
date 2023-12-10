@@ -11,13 +11,14 @@ const Paginate = ({ setPaginate, totalPages }) => {
   }
 
   return (
-    <nav>
+      <nav>
       {pages && pages.map((pageNumber) => (
         <button key={pageNumber} onClick={() => handlePageClick(pageNumber)}>
           {pageNumber}
         </button>
       ))}
     </nav>
+    
   );
 };
 

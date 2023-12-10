@@ -1,8 +1,7 @@
 .pokemonContainer {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.763);
   width: 15rem;
   margin: 15px;
-  height: 20rem;
   text-decoration: none;
   text-align: center;
   border-radius: 15%;
@@ -10,38 +9,19 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.4) 10px 20px 30px,
-    rgba(0, 0, 0, 0.3) 10px 1px 53px 3px, rgba(1, 0, 0, 0.2) 0px -1px 3px inset;
+  box-shadow: 0 0 20px rgb(222, 205, 52);
   cursor: pointer;
   transition: all 0.9s;
   user-select: none;
   font-weight: bolder;
 }
 
-.pokemonContainer:hover {
-  transform: scale(1.021);
-  background: #9a9a9a;
-}
-
-.pokemonContainer:active {
-  transform: scale(0.95) rotateZ(1.1deg);
-}
 
 .pokemonName {
   font-size: larger;
     text-transform: capitalize;
     font-weight: bold; 
     color: black;
-}
-
-.pokemonInfo {
-  display: flex;
-  flex-direction: column;
-  font-size: medium;
-  font-weight: 500;
-  text-transform: capitalize;
-  font-family: 'TuTipoDeLetra', sans-serif;
-
 }
 
 .pokemonContainer {
@@ -56,7 +36,7 @@
 
 .pokemonContainer:hover {
   transform: scale(1.021);
-  background: #9a9a9a;
+  background: #a59f94;
 }
 
 .pokemonContainer:active {
@@ -71,4 +51,4 @@
 
 .namePokemonCard {
   text-decoration: none;
-}
+} 
