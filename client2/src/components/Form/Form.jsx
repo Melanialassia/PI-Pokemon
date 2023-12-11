@@ -21,7 +21,6 @@ const Form = () => {
         weight: "",
         types: []
     });
-    console.log(input.types);
 
     useEffect(() => {
         dispatch(getTypes());
@@ -66,10 +65,34 @@ const Form = () => {
         });
     };
 
+    const disable = () => {
+        let disabled = true;
+        for (let error in errors) {
+          //console.log("soy error", error);
+          if (errors[error] === "" || errors[error].length === 0) disabled = false;
+          else {
+            disabled = true;
+            break;
+          }
+        }
+        return disabled;
+      };
+
     const handleSubmit = (event) => {
         event.preventDefault();
+        const obj = {
+            name: input.name.toLowerCase(),
+            image: input.image,
+            hp: input.hp,
+            attack: input.attack,
+            defense: input.defense,
+            speed: input.speed,
+            types: input.types,
+            height: input.height,
+            weight: input.weight
+        }
         if (Object.keys(errors).length === 0) {
-            dispatch(createPokemon(input));
+            dispatch(createPokemon(obj));
             setInput({
                 name: "",
                 image: "",
@@ -91,181 +114,179 @@ const Form = () => {
             <Link to={"/home"} className="button">
                 <button >Volver</button>
             </Link>
-        <div className="container">
-            <form onSubmit={(event) => handleSubmit(event)}>
-                <h1>Crea tu pokemon</h1>
-                <div className="formGroup">
-                    
-                    <div className="inputContainer">
-                        <input
-                            id="name"
-                            placeholder="Nombre"
-                            type="text"
-                            name="name"
-                            value={input.name}
-                            onChange={handleChange}
-                            className="formInput"
-                        />
-                    </div>
-                    {errors.name && (
-                        <div className="errorContainer">
-                            <p className="errorText">{errors.name}</p>
-                        </div>
-                    )}
-                </div>
+            <div className="container">
+                <form onSubmit={(event) => handleSubmit(event)}>
+                    <h1>Crea tu pokemon</h1>
+                    <div className="formGroup">
 
-                <div>
-                    <input
-                        id="image"
-                        placeholder="Imagen .png "
-                        type="text"
-                        name="image"
-                        value={input.image}
-                        onChange={(event) => handleChange(event)}
-                        className="formInput"
-                    /> {errors.image &&(
-                        <div className="errorContainer">
-                            <p className="errorText">{errors.image}</p>
+                        <div className="inputContainer">
+                            <input
+                                id="name"
+                                placeholder="Nombre"
+                                type="text"
+                                name="name"
+                                value={input.name}
+                                onChange={handleChange}
+                                className="formInput"
+                            />
+                        </div>
+                        {errors.name && (
+                            <div className="errorContainer">
+                                <p className="errorText">{errors.name}</p>
                             </div>
-                    )}
-                </div>
+                        )}
+                    </div>
 
-                <div>
-                    <input
-                        id="hp"
-                        placeholder="Hp"
-                        type="number"
-                        name="hp"
-                        value={input.hp}
-                        onChange={(event) => handleChange(event)}
-                        className="formInput"
-                    /> {errors.hp && (
-                        <div className="errorContainer"> 
-                           <p className="errorText">{errors.hp}</p> 
-                        </div>
-                    )}
-                </div>
+                    <div>
+                        <input
+                            id="image"
+                            placeholder="Imagen .png "
+                            type="text"
+                            name="image"
+                            value={input.image}
+                            onChange={(event) => handleChange(event)}
+                            className="formInput"
+                        /> {errors.image && (
+                            <div className="errorContainer">
+                                <p className="errorText">{errors.image}</p>
+                            </div>
+                        )}
+                    </div>
 
-                <div>
-                    <input
-                        id="attack"
-                        placeholder="Ataque"
-                        type="number"
-                        name="attack"
-                        value={input.attack}
-                        onChange={(event) => handleChange(event)}
-                        className="formInput"
-                    />{errors.attack && (
-                        <div className="errorContainer">
-                            <p className="errorText">{errors.attack}</p>
-                        </div>
-                    )}
-                </div>
+                    <div>
+                        <input
+                            id="hp"
+                            placeholder="Hp"
+                            type="number"
+                            name="hp"
+                            value={input.hp}
+                            onChange={(event) => handleChange(event)}
+                            className="formInput"
+                        /> {errors.hp && (
+                            <div className="errorContainer">
+                                <p className="errorText">{errors.hp}</p>
+                            </div>
+                        )}
+                    </div>
 
-                <div>
-                    <input
-                        id="defense"
-                        placeholder="Defensa"
-                        type="number"
-                        name="defense"
-                        value={input.defense}
-                        onChange={(event) => handleChange(event)}
-                        className="formInput"
-                    />{errors.defense && (
-                        <div className="errorContainer">
-                            <p className="errorText">{errors.defense}</p>
-                        </div>
-                    ) }
-                </div>
+                    <div>
+                        <input
+                            id="attack"
+                            placeholder="Ataque"
+                            type="number"
+                            name="attack"
+                            value={input.attack}
+                            onChange={(event) => handleChange(event)}
+                            className="formInput"
+                        />{errors.attack && (
+                            <div className="errorContainer">
+                                <p className="errorText">{errors.attack}</p>
+                            </div>
+                        )}
+                    </div>
 
-                <div>
-                    <input
-                        id="speed"
-                        placeholder="Velocidad"
-                        type="number"
-                        name="speed"
-                        value={input.speed}
-                        onChange={(event) => handleChange(event)}
-                        className="formInput"
-                    /> {errors.speed && (
-                        <div className="errorContainer">
-                            <p className="errorText">{errors.speed}</p>
-                        </div>
-                    )}
-                </div>
+                    <div>
+                        <input
+                            id="defense"
+                            placeholder="Defensa"
+                            type="number"
+                            name="defense"
+                            value={input.defense}
+                            onChange={(event) => handleChange(event)}
+                            className="formInput"
+                        />{errors.defense && (
+                            <div className="errorContainer">
+                                <p className="errorText">{errors.defense}</p>
+                            </div>
+                        )}
+                    </div>
 
-                <div>
-                    <input
-                        id="height"
-                        placeholder="Altura"
-                        type="number"
-                        name="height"
-                        value={input.height}
-                        onChange={(event) => handleChange(event)}
-                        className="formInput"
-                    /> {errors.height && (
-                        <div className="errorContainer">
-                            <p className="errorText">{errors.height}</p>
-                        </div>
-                    ) }
-                </div>
+                    <div>
+                        <input
+                            id="speed"
+                            placeholder="Velocidad"
+                            type="number"
+                            name="speed"
+                            value={input.speed}
+                            onChange={(event) => handleChange(event)}
+                            className="formInput"
+                        /> {errors.speed && (
+                            <div className="errorContainer">
+                                <p className="errorText">{errors.speed}</p>
+                            </div>
+                        )}
+                    </div>
 
-                <div>
-                    <input
-                        id="weight"
-                        placeholder="Peso"
-                        type="number"
-                        name="weight"
-                        value={input.weight}
-                        onChange={(event) => handleChange(event)}
-                        className="formInput"
-                    /> {errors.weight && (
-                        <div className="errorContainer">
-                           <p className="errorText">{errors.weight}</p> 
-                        </div>
-                    )}
-                </div>
+                    <div>
+                        <input
+                            id="height"
+                            placeholder="Altura"
+                            type="number"
+                            name="height"
+                            value={input.height}
+                            onChange={(event) => handleChange(event)}
+                            className="formInput"
+                        /> {errors.height && (
+                            <div className="errorContainer">
+                                <p className="errorText">{errors.height}</p>
+                            </div>
+                        )}
+                    </div>
 
-                <div>
-                    <label htmlFor="types">
-                        Seleccione los tipos: </label>
-                    <select
-                        id="types"
-                        onChange={(event) => handleSelect(event)}
-                    >
+                    <div>
+                        <input
+                            id="weight"
+                            placeholder="Peso"
+                            type="number"
+                            name="weight"
+                            value={input.weight}
+                            onChange={(event) => handleChange(event)}
+                            className="formInput"
+                        /> {errors.weight && (
+                            <div className="errorContainer">
+                                <p className="errorText">{errors.weight}</p>
+                            </div>
+                        )}
+                    </div>
+
+                    <div>
+                        <label htmlFor="types">
+                            Seleccione los tipos: </label>
+                        <select
+                            id="types"
+                            onChange={(event) => handleSelect(event)}
+                        >
+                            {
+                                types.map((e, index) => (
+                                    <option key={index} value={e.name}>
+                                        {e.name}
+                                    </option>
+                                ))
+                            }
+                        </select>{errors.types && (
+                            <div className="errorContainer">
+                                <p className="errorText">{errors.types}</p>
+                            </div>
+                        )}
+                    </div>
+                    <div>
+
+                    </div>
+                    <div>
                         {
-                            types.map((e, index) => (
-                                <option key={index} value={e.name}>
-                                    {e.name}
-                                </option>
+                            input.types.map((e, index) => (
+                                <div key={index}>
+                                    <p>{e}</p>
+                                    <button onClick={() => handlerDelete(e)}>x</button>
+                                </div>
                             ))
                         }
-                    </select>{errors.types && (
-                        <div className="errorContainer">
-                            <p className="errorText">{errors.types}</p>
-                        </div>
-                    )}
-                </div>
-                <div>
-
-                </div>
-                <div>
-                    {
-                        input.types.map((e, index) => (
-                            <div key={index}>
-                                <p>{e}</p>
-                                <button onClick={() => handlerDelete(e)}>x</button>
-                            </div>
-                        ))
-                    }
-                </div>
-                <br />
-                <br />
-                <button type="submit"> Crear</button>
-                <br />
-                <br />
-            </form >
-        </div >
+                    </div>
+                    <br />
+                    <br />
+                    <button type="submit"> Crear</button>
+                </form >
+            </div >
         </div>
     );
 };

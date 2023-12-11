@@ -14,12 +14,10 @@ import {
 import Paginate from '../Paginate/Paginate';
 import NavBar from '../NavBar/NavBar';
 import Cards from '../Cards/Cards';
-import { Link } from 'react-router-dom';
 
 
 const Home = () => {
   const allPokemons = useSelector((state) => state.pokemon);
-  console.log("home", allPokemons);
   const allTypes = useSelector((state) => state.types);
   const dispatch = useDispatch();
 

@@ -71,21 +71,13 @@ const reducer = (state = initialState, action) => {
 
         case ORDER_NAME:
             if (action.payload === "A-Z") {
-                const orderByName = [...state.pokemon].sort((prev, next) => {
-                    if (prev.name > next.name) return 1;
-                    if (prev.name < next.name) return -1;
-                    return 0;
-                })
+                const orderByName = [...state.pokemon].sort((a, b) => a.name.localeCompare(b.name))
                 return {
                     ...state,
                     pokemon: [...orderByName]
                 }
             } else if (action.payload === "Z-A") {
-                const orderByName = [...state.pokemon].sort((prev, next) => {
-                    if (prev.name > next.name) return -1;
-                    if (prev.name < next.name) return 1;
-                    return 0;
-                })
+                const orderByName = [...state.pokemon].sort((a, b) => b.name.localeCompare(a.name))
                 return {
                     ...state,
                     pokemon: [...orderByName]

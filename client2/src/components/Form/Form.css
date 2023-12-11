@@ -11,9 +11,12 @@
 .button {
   margin-right: 1200px; 
   margin-top: 30px;
-
 }
 
+.button[disabled] {
+  background-color: rgba(238, 20, 20, 0.5);
+  cursor: no-drop;
+}
 
 .formInput {
   width: 40%;

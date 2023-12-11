@@ -1,6 +1,7 @@
 import './Paginate.css';
 
-const Paginate = ({ setPaginate, totalPages }) => {
+const Paginate = ({ setPaginate, totalPages, paginate }) => {
+  
   const handlePageClick = (pageNumber) => {
     setPaginate(pageNumber);
   };
@@ -11,14 +12,17 @@ const Paginate = ({ setPaginate, totalPages }) => {
   }
 
   return (
-      <nav>
+    <nav>
       {pages && pages.map((pageNumber) => (
-        <button key={pageNumber} onClick={() => handlePageClick(pageNumber)}>
+        <button
+          key={pageNumber}
+          onClick={() => handlePageClick(pageNumber)}
+          className={pageNumber === paginate ? 'active' : ''}
+        >
           {pageNumber}
         </button>
       ))}
     </nav>
-    
   );
 };
 
