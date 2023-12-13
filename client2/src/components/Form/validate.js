@@ -2,7 +2,7 @@
 const validate = (input) => {
     let errors = {};
     let regexImage = /^(http|https):\/\/[^\s]+\.png$/
-    console.log("validacion", input.types);
+    
 
     if (!input.name) {
         errors.name = "Campo obligatorio";
@@ -73,8 +73,8 @@ const validate = (input) => {
     };
 
     // Validación de los tipos
-    if (input.types.length >= 3) {
-        errors.types = "Solo vas a poder seleccionar 2 tipos";
+    if (input.types.length > 1) {        
+        errors.types ="Solo vas a poder seleccionar 2 tipos";
     };
 
 

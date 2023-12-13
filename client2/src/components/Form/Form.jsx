@@ -21,7 +21,7 @@ const Form = () => {
         height: "",
         weight: "",
     });
-    console.log("principio", input);
+   
 
     useEffect(() => {
         dispatch(getTypes());
@@ -35,15 +35,15 @@ const Form = () => {
             types: [...input.types, event.target.value]
         });
 
-        if (input.types.length > 1) {
-            setInput({
-                ...input,
-            })
+        if (input.types.length >= 2) {
+           
             setErrors(validate({
                 ...input,
                 [event.target.name]: event.target.value
             }));
+            console.log(errors);
         }
+        
 
     };
 
@@ -65,6 +65,14 @@ const Form = () => {
             ...input,
             types: input.types.filter((type) => type !== typeToDelete)
         });
+
+        if(input.types.length===3){
+            console.log("entre");
+            setErrors(validate({
+                        ...input,
+                       types:''
+                    }))
+        }
     };
 
     const handleSubmit = (event) => {
@@ -81,7 +89,11 @@ const Form = () => {
             weight: input.weight
         }
         console.log("obj", obj);
-        if (Object.keys(errors).length === 0) {
+        if(input.types.length===1 || !input.types.length ){
+           
+            alert("Debe agregar dos types")
+            
+        }else if (Object.keys(errors).length === 0) {
             dispatch(createPokemon(obj));
             console.log(obj,"obj");
             setInput({
@@ -95,7 +107,7 @@ const Form = () => {
                 height: "",
                 weight: ""
             });
-        } else {
+        } else if(errors) {
             alert("Tienes que llenar los campos obligatorios");
         }
     };
