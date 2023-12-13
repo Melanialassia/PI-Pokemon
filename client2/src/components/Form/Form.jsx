@@ -84,18 +84,17 @@ const Form = () => {
             hp: input.hp,
             attack: input.attack,
             defense: input.defense,
-            speed: input.speed,
-            height: input.height,
-            weight: input.weight
+            speed: +input.speed,
+            height: +input.height,
+            weight: +input.weight
         }
-        console.log("obj", obj);
+
         if (input.types.length === 1 || !input.types.length) {
 
             alert("Debe agregar dos types")
 
         } else if (Object.keys(errors).length === 0) {
             dispatch(createPokemon(obj));
-            console.log(obj, "obj");
             setInput({
                 name: "",
                 types: [],
