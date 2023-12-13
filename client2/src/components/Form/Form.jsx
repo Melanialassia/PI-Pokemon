@@ -12,6 +12,7 @@ const Form = () => {
 
     const [input, setInput] = useState({
         name: "",
+        types: [],
         image: "",
         hp: "",
         attack: "",
@@ -19,26 +20,14 @@ const Form = () => {
         speed: "",
         height: "",
         weight: "",
-        types: []
     });
+    console.log("principio", input);
 
     useEffect(() => {
         dispatch(getTypes());
     }, []);
 
     const [errors, setErrors] = useState({});
-
-    const handleChange = (event) => {
-        setInput({
-            ...input,
-            [event.target.name]: event.target.value
-        });
-
-        setErrors(validate({
-            ...input,
-            [event.target.name]: event.target.value
-        }));
-    };
 
     const handleSelect = (event) => {
         setInput({
@@ -58,6 +47,19 @@ const Form = () => {
 
     };
 
+    const handleChange = (event) => {
+        setInput({
+            ...input,
+            [event.target.name]: event.target.value
+        });
+        setErrors(validate({
+            ...input,
+            [event.target.name]: event.target.value
+        }));
+    };
+
+
+
     const handlerDelete = (typeToDelete) => {
         setInput({
             ...input,
@@ -65,47 +67,36 @@ const Form = () => {
         });
     };
 
-    const disable = () => {
-        let disabled = true;
-        for (let error in errors) {
-          //console.log("soy error", error);
-          if (errors[error] === "" || errors[error].length === 0) disabled = false;
-          else {
-            disabled = true;
-            break;
-          }
-        }
-        return disabled;
-      };
-
     const handleSubmit = (event) => {
         event.preventDefault();
         const obj = {
             name: input.name.toLowerCase(),
+            types: input.types,
             image: input.image,
             hp: input.hp,
             attack: input.attack,
             defense: input.defense,
             speed: input.speed,
-            types: input.types,
             height: input.height,
             weight: input.weight
         }
+        console.log("obj", obj);
         if (Object.keys(errors).length === 0) {
             dispatch(createPokemon(obj));
+            console.log(obj,"obj");
             setInput({
                 name: "",
+                types: [],
                 image: "",
                 hp: "",
                 attack: "",
                 defense: "",
                 speed: "",
-                types: [],
                 height: "",
                 weight: ""
             });
         } else {
-            alert("Tienes que llenar los campos obligatorios")
+            alert("Tienes que llenar los campos obligatorios");
         }
     };
 
@@ -253,7 +244,8 @@ const Form = () => {
                         <label htmlFor="types">
                             Seleccione los tipos: </label>
                         <select
-                            id="types"
+                        id="types"
+                            name="tipo"
                             onChange={(event) => handleSelect(event)}
                         >
                             {
@@ -263,16 +255,17 @@ const Form = () => {
                                     </option>
                                 ))
                             }
-                        </select>{errors.types && (
+                        </select> {errors.types && (
                             <div className="errorContainer">
                                 <p className="errorText">{errors.types}</p>
                             </div>
                         )}
                     </div>
-                    <div>
-
-                    </div>
-                    <div>
+                    <br />
+                    <br />
+                    <button type="submit"> Crear</button>
+                </form >
+                <div>
                         {
                             input.types.map((e, index) => (
                                 <div key={index}>
@@ -282,10 +275,6 @@ const Form = () => {
                             ))
                         }
                     </div>
-                    <br />
-                    <br />
-                    <button type="submit"> Crear</button>
-                </form >
             </div >
         </div>
     );

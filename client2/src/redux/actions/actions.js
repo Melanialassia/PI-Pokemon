@@ -66,7 +66,7 @@ export const createPokemon = (info) => {
             return response;
         } catch (error) {
             console.log(error);
-            alert(error.message);
+            alert("¡Debes completar los campos correspondiente para crear a tu Pokemon!");
         }
     };
 };

@@ -11,6 +11,7 @@ const createPokemonController = async (
   height = null,
   weight = null
 ) => {
+  
   const [pokemon, created] = await Pokemon.findOrCreate({
     where: { name },
     defaults: {

@@ -2,14 +2,18 @@
 const validate = (input) => {
     let errors = {};
     let regexImage = /^(http|https):\/\/[^\s]+\.png$/
-    let regexNumber = /^([0-9])*$/;
+    console.log("validacion", input.types);
 
     if (!input.name) {
         errors.name = "Campo obligatorio";
-    }
+    };
 
     if (input.name.length > 10) {
-        errors.name = "Debe ser menor a 10 carácteres";
+        errors.name = "Debe ser menor a 10 caracteres";
+    };
+
+    if (!/^[a-zA-Z]+$/.test(input.name)) {
+        errors.name = "El nombre solo puede contener letras";
     };
 
     if (!input.image) {
@@ -20,66 +24,55 @@ const validate = (input) => {
         errors.image = "Ingrese una URL de imagen PNG válida";
     }
 
-    if (!input.hp) {
-        errors.hp = "Campo obligatorio";
-    };
-
     if (input.hp <= 0) {
-        errors.hp = "No puede ser menor a 0";
+        errors.hp = "HP deber ser meyor a 0";
     };
 
-    if (!regexNumber.test(input.hp)) {
-        errors.hp = "Solo se permiten numeros mayores a 0";
-    };
-
-    if (!input.attack) {
-        errors.attack = "Campo obligatorio";
+    if (input.hp >= 251) {
+        errors.hp = "HP no puede ser mayor a 250"
     };
 
     if (input.attack <= 0) {
-        errors.attack = "No puede ser menor a 0";
+        errors.attack = "El ataque deber ser menor a 0";
     };
 
-    if (!regexNumber.test(input.attack)) {
-        errors.attack = "Solo se permiten numeros mayores a 0";
-    };
-
-    if (!input.defense) {
-        errors.defense = "Campo obligatorio";
+    if (input.attack >= 251) {
+        errors.attack = "El ataque no puede ser mayor a 250"
     };
 
     if (input.defense <= 0) {
-        errors.defense = "No puede ser menor a 0";
+        errors.defense = "La defensa deber ser menor a 0";
     };
 
-    if (!regexNumber.test(input.defense)) {
-        errors.defense = "Solo se permiten numeros mayores a 0";
+    if (input.defense >= 251) {
+        errors.defense = "La defensa no puede ser mayor a 250"
     };
 
-    if (input.speed <= 0) {
-        errors.speed = "No puede ser menor a 0";
+    if (input.speed <= 0 && input.speed.length) {
+        errors.speed = "La velocidad deber ser menor a 0";
     };
 
-    if (!regexNumber.test(input.speed)) {
-        errors.speed = "Solo se permiten numeros mayores a 0";
+    if (input.speed >= 251) {
+        errors.speed = "La velocida no puede ser mayor a 250"
     };
 
-    if (input.height <= 0) {
-        errors.height = "No puede ser menor a 0";
+    if (input.height <= 0 && input.height.length) {
+        errors.height = "La altura deber ser menor a 0";
     };
 
-    if (!regexNumber.test(input.height)) {
-        errors.height = "Solo se permiten numeros mayores a 0";
+    if (input.height >= 251) {
+        errors.height = "La altura no puede ser mayor a 250"
     };
 
-    if (input.weight <= 0) {
-        errors.weight = "No puede ser menor a 0";
+    if (input.weight <= 0 && input.weight.length) {
+        errors.weight = " El peso deber ser menor a 0";
     };
 
-    if (!regexNumber.test(input.weight)) {
-        errors.weight = "Solo se permiten numeros mayores a 0";
+    if (input.weight >= 251) {
+        errors.weight = "El peso no puede ser mayor a 250"
     };
 
+    // Validación de los tipos
     if (input.types.length >= 3) {
         errors.types = "Solo vas a poder seleccionar 2 tipos";
     };
@@ -89,3 +82,4 @@ const validate = (input) => {
 };
 
 export default validate;
+
