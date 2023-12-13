@@ -21,7 +21,7 @@ const Form = () => {
         height: "",
         weight: "",
     });
-   
+
 
     useEffect(() => {
         dispatch(getTypes());
@@ -36,14 +36,14 @@ const Form = () => {
         });
 
         if (input.types.length >= 2) {
-           
+
             setErrors(validate({
                 ...input,
                 [event.target.name]: event.target.value
             }));
             console.log(errors);
         }
-        
+
 
     };
 
@@ -66,12 +66,12 @@ const Form = () => {
             types: input.types.filter((type) => type !== typeToDelete)
         });
 
-        if(input.types.length===3){
+        if (input.types.length === 3) {
             console.log("entre");
             setErrors(validate({
-                        ...input,
-                       types:''
-                    }))
+                ...input,
+                types: ''
+            }))
         }
     };
 
@@ -89,13 +89,13 @@ const Form = () => {
             weight: input.weight
         }
         console.log("obj", obj);
-        if(input.types.length===1 || !input.types.length ){
-           
+        if (input.types.length === 1 || !input.types.length) {
+
             alert("Debe agregar dos types")
-            
-        }else if (Object.keys(errors).length === 0) {
+
+        } else if (Object.keys(errors).length === 0) {
             dispatch(createPokemon(obj));
-            console.log(obj,"obj");
+            console.log(obj, "obj");
             setInput({
                 name: "",
                 types: [],
@@ -107,7 +107,7 @@ const Form = () => {
                 height: "",
                 weight: ""
             });
-        } else if(errors) {
+        } else if (errors) {
             alert("Tienes que llenar los campos obligatorios");
         }
     };
@@ -256,7 +256,7 @@ const Form = () => {
                         <label htmlFor="types">
                             Seleccione los tipos: </label>
                         <select
-                        id="types"
+                            id="types"
                             name="tipo"
                             onChange={(event) => handleSelect(event)}
                         >
@@ -278,15 +278,15 @@ const Form = () => {
                     <button type="submit"> Crear</button>
                 </form >
                 <div>
-                        {
-                            input.types.map((e, index) => (
-                                <div key={index}>
-                                    <p>{e}</p>
-                                    <button onClick={() => handlerDelete(e)}>x</button>
-                                </div>
-                            ))
-                        }
-                    </div>
+                    {
+                        input.types.map((e, index) => (
+                            <div key={index}>
+                                <p>{e}</p>
+                                <button onClick={() => handlerDelete(e)}>x</button>
+                            </div>
+                        ))
+                    }
+                </div>
             </div >
         </div>
     );
